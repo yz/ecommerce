@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Parse
 
 let reuseIdentifier = "CategoryCell"
+
 
 var categoryList = ["Category-1","Category-2","category-3"]
 
@@ -16,13 +18,32 @@ var subCategoryList=[["SubCategory-01","SubCategory-02","SubCategory-03"],["SubC
 
 var categorySelected : Int = -1
 
+var categorySelected1:String = "All"
+var myImage = UIImage(named: "Apple_Swift_Logo")
+
 class CategoryViewController: UICollectionViewController {
-    var myImage = UIImage(named: "Apple_Swift_Logo")
+    
+    func retrieveListing(currentList :String) ->[String]{
+//        var tblProduct:PFObject = PFObject(className:"Product")
+        var findCatagory:PFQuery = PFQuery(className: "Product");
+        findCatagory = findCatagory.whereKey("Hierarchy", hasPrefix: currentList)
+        for obj in findCatagory.findObjects(){
+            println(obj["Hierarchy"])
+        }
+        return ["All"]
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title="WAR"
-
+        Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
+        retrieveListing("All")
+        //var product:PFObject = PFObject(className:"Product")
+        //product["Hierarchy"] = "All";
+        //println("Done with parse")
+        //product.save()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -101,7 +122,7 @@ class CategoryViewController: UICollectionViewController {
         
         
         categorySelected = indexPath.item
-        println(indexPath.item)
+        retrieveListing("All")
         //hierarchy.append(categorySelected)
         self.collectionView?.reloadData()
         //var vc = CategoryViewController(nibName: "CategoryViewController", bundle: nil)
