@@ -34,6 +34,7 @@
 		9C4CB9561AB4B499007A19E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4CB9551AB4B499007A19E6 /* Security.framework */; };
 		9C4CB9581AB4B4A9007A19E6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4CB9571AB4B4A9007A19E6 /* StoreKit.framework */; };
 		9C4CB95A1AB4B7C1007A19E6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4CB9591AB4B7C1007A19E6 /* libsqlite3.dylib */; };
+		9CB22D4A1AB615D500120DF5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB22D491AB615D500120DF5 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		9C4CB9551AB4B499007A19E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9C4CB9571AB4B4A9007A19E6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9C4CB9591AB4B7C1007A19E6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		9CB22D491AB615D500120DF5 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../Downloads/parse-library-1/Parse.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				9C4CB94B1AB4B387007A19E6 /* libz.dylib in Frameworks */,
 				9C4CB9581AB4B4A9007A19E6 /* StoreKit.framework in Frameworks */,
 				9C4CB9561AB4B499007A19E6 /* Security.framework in Frameworks */,
+				9CB22D4A1AB615D500120DF5 /* Parse.framework in Frameworks */,
 				9C4CB9541AB4B46E007A19E6 /* QuartzCore.framework in Frameworks */,
 				9C4CB9521AB4B442007A19E6 /* MobileCoreServices.framework in Frameworks */,
 				9C4CB9501AB4B430007A19E6 /* CoreLocation.framework in Frameworks */,
@@ -138,6 +141,7 @@
 		3BC1054E1AA0C47C0013871A = {
 			isa = PBXGroup;
 			children = (
+				9CB22D491AB615D500120DF5 /* Parse.framework */,
 				9C4CB9591AB4B7C1007A19E6 /* libsqlite3.dylib */,
 				9C4CB9571AB4B4A9007A19E6 /* StoreKit.framework */,
 				9C4CB9551AB4B499007A19E6 /* Security.framework */,
@@ -520,6 +524,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mobile",
 					Store,
+					"/Users/ashwinkarthiksrinivasan/Downloads/parse-library-1",
 				);
 				INFOPLIST_FILE = "Mobile Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -535,6 +540,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mobile",
 					Store,
+					"/Users/ashwinkarthiksrinivasan/Downloads/parse-library-1",
 				);
 				INFOPLIST_FILE = "Mobile Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

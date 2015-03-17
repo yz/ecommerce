@@ -12,9 +12,11 @@ import Parse
 let reuseIdentifier = "CategoryCell"
 
 
-var categoryList = ["Category-1","Category-2","category-3"]
+var categoryList = []
 
-var subCategoryList=[["SubCategory-01","SubCategory-02","SubCategory-03"],["SubCategory-11","SubCategory-12","SubCategory-13"],["SubCategory-21","SubCategory-22","SubCategory-23"]]
+
+
+var productList = []
 
 var categorySelected : Int = -1
 
@@ -23,14 +25,76 @@ var myImage = UIImage(named: "Apple_Swift_Logo")
 
 class CategoryViewController: UICollectionViewController {
     
-    func retrieveListing(currentList :String) ->[String]{
-//        var tblProduct:PFObject = PFObject(className:"Product")
-        var findCatagory:PFQuery = PFQuery(className: "Product");
-        findCatagory = findCatagory.whereKey("Hierarchy", hasPrefix: currentList)
-        for obj in findCatagory.findObjects(){
-            println(obj["Hierarchy"])
+    func getSubCategories( productList: PFQuery , categoryName: String) -> [String]{
+        var list = [String : Bool ] ()
+        var nextSetOfCategories = [String] ()
+        
+        for obj in productList.findObjects(){
+            var heirarchy =  obj["Hierarchy"] as String
+            
+            let needle: Character = "."
+            var end=false
+            var found=false
+            
+            while(!end)
+            {
+                if let idx = find(heirarchy,needle) {
+                    var searchCategory = heirarchy.substringToIndex(idx)
+                    //println("Search Category:\(searchCategory)")
+                    if(categoryName==searchCategory)
+                    {
+                        println("Reached the current level")
+                        found=true
+                    }
+                    else if(found==true)
+                    {
+                        if(list.indexForKey(searchCategory)==nil)
+                        {
+                            println("Required: \(searchCategory)")
+                            list.updateValue( true , forKey: heirarchy.substringToIndex(idx))
+                        }
+                        end=true
+                    }
+                    
+                    heirarchy.removeAtIndex(idx)
+                    heirarchy=heirarchy.substringFromIndex(idx)
+                    println("Heirarchy: \(heirarchy)")
+                    
+                }
+                else
+                {
+                    if(found==true)  // Considers the last level listing. i.e the product itself
+                    {
+                        list.updateValue(true , forKey:heirarchy )
+                        
+                    }
+                    //println("Not found")
+                    end=true
+                }
+                println(heirarchy)
+            }
+            println(list.count)
+            
         }
-        return ["All"]
+        for key in list.keys
+        {
+            nextSetOfCategories.append(key)
+        }
+        
+        return nextSetOfCategories
+    }
+    // Gets the next set of categories for the given input category
+    func retrieveListing(categoryName :String) ->[String]{
+
+        println("Retrieving list for \(categoryName)")
+        var productList:PFQuery = PFQuery(className: "Product");
+        
+        
+        var matchPattern = ".*\(categoryName).*"
+        
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)  // retrieves the set of products that matched the input
+        
+        return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
     }
     
     
@@ -38,12 +102,9 @@ class CategoryViewController: UICollectionViewController {
         super.viewDidLoad()
         navigationItem.title="WAR"
         Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
-        retrieveListing("All")
-        //var product:PFObject = PFObject(className:"Product")
-        //product["Hierarchy"] = "All";
-        //println("Done with parse")
-        //product.save()
-        
+        println("Category Count:\(categoryList.count)")
+        categoryList=retrieveListing("All")
+        println("Category Count:\(categoryList.count)")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -84,21 +145,16 @@ class CategoryViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryViewCell
     
-
-      if(categorySelected == -1)
-      {
         cell.categoryNameLabel.text = "\(categoryList[indexPath.item])"
         
         
         cell.categoryImage.image=myImage
-      }
-      else
-      {
-        cell.categoryNameLabel.text = "\(subCategoryList[categorySelected][indexPath.item])"
-        cell.backgroundColor = UIColor.redColor()
+      
+      
+        //cell.categoryNameLabel.text = "\(subCategoryList[categorySelected][indexPath.item])"
+        //cell.backgroundColor = UIColor.redColor()
         
-      }
-        
+      
         
     
       return cell
@@ -121,12 +177,9 @@ class CategoryViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         
-        categorySelected = indexPath.item
-        retrieveListing("All")
-        //hierarchy.append(categorySelected)
+        
+        categoryList = retrieveListing("\(categoryList[indexPath.item])")
         self.collectionView?.reloadData()
-        //var vc = CategoryViewController(nibName: "CategoryViewController", bundle: nil)
-        //navigationController?.pushViewController(vc, animated: false)
         return true
     }
 
