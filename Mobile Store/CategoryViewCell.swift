@@ -13,5 +13,10 @@ class CategoryViewCell: UICollectionViewCell {
     
     @IBOutlet weak var categoryNameLabel: UILabel!
 
+    var image: UIImage!
+    
+    var descr: String!
+    
+    var objID: String!
     
 }

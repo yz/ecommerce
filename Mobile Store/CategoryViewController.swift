@@ -9,6 +9,16 @@
 import UIKit
 import Parse
 
+struct Stack<T> {
+    var items = [T]()
+    mutating func push(item: T) {
+        items.append(item)
+    }
+    mutating func pop() -> T {
+        return items.removeLast()
+    }
+}
+
 let reuseIdentifier = "CategoryCell"
 
 
@@ -20,11 +30,25 @@ var productList = []
 
 var categorySelected : Int = -1
 
-var categorySelected1:String = "All"
-var myImage = UIImage(named: "Apple_Swift_Logo")
+var currentRoot:String = "All"
+var hierarchyStack = Stack<String>()
+//var my1Image = UIImage(named: "Apple_Swift_Logo")
+var myImage = UIImage(data: NSData(contentsOfURL: NSURL(string: "https://www.gravatar.com/avatar/a3495409c37d14319939f6c0527db7ce?s=128&d=identicon&r=PG&f=1")!)!)
 
 class CategoryViewController: UICollectionViewController {
     
+    func getSubCategoriesObjectIDs( productList: PFQuery , categoryName: String) -> [[String]]{
+        var ret: [[String]] = []
+        
+        for obj in productList.findObjects(){
+            var inLst:[String] = []
+            inLst.append(obj["Hierarchy"] as! String)
+            inLst.append(obj["itemImage"] as! String)
+            ret.append(inLst)
+        }
+        return ret
+    }
+    /*
     func getSubCategories( productList: PFQuery , categoryName: String) -> [String]{
         var list = [String : Bool ] ()
         var nextSetOfCategories = [String] ()
@@ -83,27 +107,31 @@ class CategoryViewController: UICollectionViewController {
         
         return nextSetOfCategories
     }
+    */
     // Gets the next set of categories for the given input category
-    func retrieveListing(categoryName :String) ->[String]{
+    func retrieveListing(categoryName :String) ->[[String]]{
 
         println("Retrieving list for \(categoryName)")
         var productList:PFQuery = PFQuery(className: "Product");
         
         
-        var matchPattern = ".*\(categoryName).*"
-        
+        //var matchPattern = ".*\(categoryName).*"
+        var matchPattern = "\(categoryName)\\.[^\\.]*$"
+   
         productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)  // retrieves the set of products that matched the input
         
-        return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
+         return getSubCategoriesObjectIDs(productList, categoryName : categoryName)
+        //return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title="WAR"
+        navigationItem.title=currentRoot
+        
         Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
         println("Category Count:\(categoryList.count)")
-        categoryList=retrieveListing("All")
+        categoryList=retrieveListing(currentRoot)
         println("Category Count:\(categoryList.count)")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -143,20 +171,18 @@ class CategoryViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CategoryViewCell
     
-        cell.categoryNameLabel.text = "\(categoryList[indexPath.item])"
+        var itemStr:String = (categoryList[indexPath.item][0]) as! String
+        itemStr = itemStr.replace(".*\\.", template: "")
         
-        
-        cell.categoryImage.image=myImage
+        cell.categoryNameLabel.text = "\(itemStr)"
+        cell.categoryImage.image=UIImage(data: NSData(contentsOfURL: NSURL(string: (categoryList[indexPath.item][1]) as! String)!)!)
       
       
         //cell.categoryNameLabel.text = "\(subCategoryList[categorySelected][indexPath.item])"
         //cell.backgroundColor = UIColor.redColor()
-        
-      
-        
-    
+
       return cell
     }
 
@@ -176,9 +202,10 @@ class CategoryViewController: UICollectionViewController {
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        
-        
-        categoryList = retrieveListing("\(categoryList[indexPath.item])")
+        hierarchyStack.push(currentRoot)
+        currentRoot = (categoryList[indexPath.item][0]) as! String
+        navigationItem.title=currentRoot.stringByReplacingOccurrencesOfString(".", withString:" > ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        categoryList = retrieveListing("\(currentRoot)")
         self.collectionView?.reloadData()
         return true
     }
