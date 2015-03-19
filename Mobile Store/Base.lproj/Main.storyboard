@@ -115,6 +115,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mri-3Z-Wj2">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -132,8 +133,8 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9OI-R9-Glv">
                                             <rect key="frame" x="32" y="15" width="80" height="80"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEn-n7-I1y">
-                                            <rect key="frame" x="8" y="111" width="134" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PEn-n7-I1y">
+                                            <rect key="frame" x="8" y="103" width="134" height="39"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -161,6 +162,7 @@
                         <connections>
                             <outlet property="dataSource" destination="eMO-dU-MnO" id="qsD-kH-Z0E"/>
                             <outlet property="delegate" destination="eMO-dU-MnO" id="TOE-3Y-wLU"/>
+                            <outletCollection property="gestureRecognizers" destination="Htp-Zo-Hv8" appends="YES" id="jcG-GB-UCK"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Title" id="ALv-fX-3Br"/>
@@ -169,6 +171,7 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugR-je-gbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Htp-Zo-Hv8"/>
             </objects>
             <point key="canvasLocation" x="742" y="-1311"/>
         </scene>

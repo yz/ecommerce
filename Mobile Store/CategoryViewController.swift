@@ -24,8 +24,6 @@ let reuseIdentifier = "CategoryCell"
 
 var categoryList = []
 
-
-
 var productList = []
 
 var categorySelected : Int = -1
@@ -124,10 +122,24 @@ class CategoryViewController: UICollectionViewController {
         //return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
     }
     
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left && currentRoot != "All") {
+            currentRoot = hierarchyStack.pop()
+            navigationItem.title=currentRoot.stringByReplacingOccurrencesOfString(".", withString:" > ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            categoryList = retrieveListing("\(currentRoot)")
+            self.collectionView?.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        leftSwipe.direction = .Left
+        view.addGestureRecognizer(leftSwipe)
+        
         navigationItem.title=currentRoot
+        
         
         Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
         println("Category Count:\(categoryList.count)")
