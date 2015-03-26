@@ -19,8 +19,9 @@ struct Stack<T> {
     }
 }
 
+// CONSTANTS
 let reuseIdentifier = "CategoryCell"
-
+let folderImgURL = "http://icons.iconarchive.com/icons/kyo-tux/aeon/256/Folder-Blue-Folder-icon.png"
 
 var categoryList = []
 
@@ -30,10 +31,67 @@ var categorySelected : Int = -1
 
 var currentRoot:String = "All"
 var hierarchyStack = Stack<String>()
-//var my1Image = UIImage(named: "Apple_Swift_Logo")
-var myImage = UIImage(data: NSData(contentsOfURL: NSURL(string: "https://www.gravatar.com/avatar/a3495409c37d14319939f6c0527db7ce?s=128&d=identicon&r=PG&f=1")!)!)
 
 class CategoryViewController: UICollectionViewController {
+    
+    func dropItem(path:String)->(){
+        var hrchy = path
+        path.replace(".*\\.", template: "")
+        var row:PFObject! = nil
+        var productList:PFQuery = PFQuery(className: "Product");
+        var matchPattern = "\(hrchy)"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        
+        if(productList.countObjects() != 0){//Object exists
+            for obj in productList.findObjects(){
+                row = obj as! PFObject
+                if row["productType"] as! Int == 1{
+                    row.deleteInBackgroundWithBlock(nil)}
+            }
+        }
+
+    }
+    
+    func addOrModifyItem(path:[String], properties:[String:AnyObject])->(){
+        
+        if(path.count == 0){
+            return
+        }
+        
+        var hrchy = path[0]
+        for i in Range(start:1, end:path.count){
+            
+            if(retrieveListing(hrchy).count == 0){
+                var row:PFObject = PFObject(className:"Product")
+                row["productType"] = 0
+                row["Hierarchy"] = hrchy
+                row["itemImage"] = folderImgURL
+                row.saveInBackgroundWithBlock(nil)
+            }
+            
+            hrchy += "." + path[i]
+        }
+        
+        var row:PFObject! = nil
+        var productList:PFQuery = PFQuery(className: "Product");
+        var matchPattern = "\(hrchy)"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        
+        if(productList.countObjects() == 0){//Create new object
+            row = PFObject(className:"Product")
+            row["productType"] = 1
+            row["Hierarchy"] = hrchy
+        }else{//Modify existing object
+            for obj in productList.findObjects(){
+                row = obj as! PFObject
+            }
+        }
+        
+        for p in properties{
+            row[p.0] = p.1
+        }
+        row.saveInBackgroundWithBlock(nil)
+    }
     
     func getSubCategoriesObjectIDs( productList: PFQuery , categoryName: String) -> [[String]]{
         var ret: [[String]] = []
@@ -122,22 +180,36 @@ class CategoryViewController: UICollectionViewController {
         //return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
     }
     
+    
+    // GESTURE CONTROL
     func handleSwipes(sender:UISwipeGestureRecognizer) {
         if (sender.direction == .Left && currentRoot != "All") {
             currentRoot = hierarchyStack.pop()
             navigationItem.title=currentRoot.stringByReplacingOccurrencesOfString(".", withString:" > ", options: NSStringCompareOptions.LiteralSearch, range: nil)
             categoryList = retrieveListing("\(currentRoot)")
             self.collectionView?.reloadData()
+        }else if (sender.direction == .Down && currentRoot != "All") {
+            navigationItem.title=currentRoot.stringByReplacingOccurrencesOfString(".", withString:" > ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            categoryList = retrieveListing("\(currentRoot)")
+            self.collectionView?.reloadData()
+            
+            dropItem(currentRoot)
         }
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        //Add gesture control
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
         leftSwipe.direction = .Left
+        var downSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        downSwipe.direction = .Down
         view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(downSwipe)
         
+        //Set title
         navigationItem.title=currentRoot
         
         
@@ -152,6 +224,8 @@ class CategoryViewController: UICollectionViewController {
     //    self.collectionView!.registerClass(CategoryViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        
+        addOrModifyItem(["All", "Toys", "Panda"], properties: ["itemImage":"http://images4.fanpop.com/image/photos/16200000/Pandas-pandas-16256344-600-750.jpg"])
     }
 
     override func didReceiveMemoryWarning() {
