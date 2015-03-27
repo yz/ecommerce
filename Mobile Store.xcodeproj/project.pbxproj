@@ -20,6 +20,11 @@
 		9C0616EE1AA9FD2E006A3066 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0616ED1AA9FD2E006A3066 /* CategoryViewController.swift */; };
 		9C0616F01AA9FF91006A3066 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0616EF1AA9FF91006A3066 /* CategoryViewCell.swift */; };
 		9C0616F21AAA0C68006A3066 /* Apple_Swift_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C0616F11AAA0C68006A3066 /* Apple_Swift_Logo.png */; };
+		9C1B89341AC4E997005B7E9C /* CategoryCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1B89331AC4E997005B7E9C /* CategoryCollectionView.xib */; };
+		9C1B89361AC4EA26005B7E9C /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B89351AC4EA26005B7E9C /* CategoryCollectionView.swift */; };
+		9C1B89401AC50706005B7E9C /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B893F1AC50706005B7E9C /* DummyViewController.swift */; };
+		9C1B894E1AC580F5005B7E9C /* CategoryPrototypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1B894D1AC580F5005B7E9C /* CategoryPrototypeCell.xib */; };
+		9C1B89501AC5815C005B7E9C /* CategoryPrototypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B894F1AC5815C005B7E9C /* CategoryPrototypeCell.swift */; };
 		9C4CB9401AB4B280007A19E6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4CB93E1AB4B280007A19E6 /* Bolts.framework */; };
 		9C4CB9411AB4B280007A19E6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4CB93F1AB4B280007A19E6 /* Parse.framework */; };
 		9C4CB9431AB4B28A007A19E6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4CB9421AB4B28A007A19E6 /* CoreData.framework */; };
@@ -67,9 +72,14 @@
 		9C0616BF1AA9E7A8006A3066 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		9C0616C11AA9E832006A3066 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9C0616EB1AA9E951006A3066 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		9C0616ED1AA9FD2E006A3066 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryViewController.swift; path = "Mobile Store/CategoryViewController.swift"; sourceTree = "<group>"; };
-		9C0616EF1AA9FF91006A3066 /* CategoryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryViewCell.swift; path = "Mobile Store/CategoryViewCell.swift"; sourceTree = "<group>"; };
+		9C0616ED1AA9FD2E006A3066 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		9C0616EF1AA9FF91006A3066 /* CategoryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewCell.swift; sourceTree = "<group>"; };
 		9C0616F11AAA0C68006A3066 /* Apple_Swift_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Apple_Swift_Logo.png; sourceTree = "<group>"; };
+		9C1B89331AC4E997005B7E9C /* CategoryCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionView.xib; sourceTree = "<group>"; };
+		9C1B89351AC4EA26005B7E9C /* CategoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionView.swift; sourceTree = "<group>"; };
+		9C1B893F1AC50706005B7E9C /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
+		9C1B894D1AC580F5005B7E9C /* CategoryPrototypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryPrototypeCell.xib; sourceTree = "<group>"; };
+		9C1B894F1AC5815C005B7E9C /* CategoryPrototypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPrototypeCell.swift; sourceTree = "<group>"; };
 		9C4CB93A1AB19F20007A19E6 /* Mobile Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile Store.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C4CB93B1AB19F20007A19E6 /* Mobile StoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mobile StoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C4CB93C1AB19F20007A19E6 /* zzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,8 +164,6 @@
 				9C4CB9461AB4B342007A19E6 /* AudioToolbox.framework */,
 				9C4CB9441AB4B298007A19E6 /* libdbm.dylib */,
 				9C4CB9421AB4B28A007A19E6 /* CoreData.framework */,
-				9C0616EF1AA9FF91006A3066 /* CategoryViewCell.swift */,
-				9C0616ED1AA9FD2E006A3066 /* CategoryViewController.swift */,
 				3BC105591AA0C47C0013871A /* Mobile Store */,
 				3BC105711AA0C47C0013871A /* Mobile StoreTests */,
 				9C4CB93A1AB19F20007A19E6 /* Mobile Store.app */,
@@ -174,6 +182,13 @@
 				3BC1055C1AA0C47C0013871A /* AppDelegate.swift */,
 				9C0616BF1AA9E7A8006A3066 /* View.xib */,
 				3BC1055E1AA0C47C0013871A /* FirstViewController.swift */,
+				9C0616ED1AA9FD2E006A3066 /* CategoryViewController.swift */,
+				9C1B893F1AC50706005B7E9C /* DummyViewController.swift */,
+				9C0616EF1AA9FF91006A3066 /* CategoryViewCell.swift */,
+				9C1B89331AC4E997005B7E9C /* CategoryCollectionView.xib */,
+				9C1B89351AC4EA26005B7E9C /* CategoryCollectionView.swift */,
+				9C1B894D1AC580F5005B7E9C /* CategoryPrototypeCell.xib */,
+				9C1B894F1AC5815C005B7E9C /* CategoryPrototypeCell.swift */,
 				3BC105601AA0C47C0013871A /* SecondViewController.swift */,
 				9C0616EB1AA9E951006A3066 /* TableViewController.swift */,
 				9C0616C11AA9E832006A3066 /* File.swift */,
@@ -336,6 +351,8 @@
 			files = (
 				9C0616C01AA9E7A8006A3066 /* View.xib in Resources */,
 				3BC105641AA0C47C0013871A /* Main.storyboard in Resources */,
+				9C1B89341AC4E997005B7E9C /* CategoryCollectionView.xib in Resources */,
+				9C1B894E1AC580F5005B7E9C /* CategoryPrototypeCell.xib in Resources */,
 				9C0616F21AAA0C68006A3066 /* Apple_Swift_Logo.png in Resources */,
 				3BC105691AA0C47C0013871A /* LaunchScreen.xib in Resources */,
 				3BC105661AA0C47C0013871A /* Images.xcassets in Resources */,
@@ -370,10 +387,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C1B89501AC5815C005B7E9C /* CategoryPrototypeCell.swift in Sources */,
 				3BC105611AA0C47C0013871A /* SecondViewController.swift in Sources */,
 				9C0616C21AA9E832006A3066 /* File.swift in Sources */,
 				3BC1055D1AA0C47C0013871A /* AppDelegate.swift in Sources */,
+				9C1B89401AC50706005B7E9C /* DummyViewController.swift in Sources */,
 				9C0616EC1AA9E951006A3066 /* TableViewController.swift in Sources */,
+				9C1B89361AC4EA26005B7E9C /* CategoryCollectionView.swift in Sources */,
 				9C0616EE1AA9FD2E006A3066 /* CategoryViewController.swift in Sources */,
 				3BC1055F1AA0C47C0013871A /* FirstViewController.swift in Sources */,
 				9C0616F01AA9FF91006A3066 /* CategoryViewCell.swift in Sources */,

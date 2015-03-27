@@ -40,73 +40,13 @@ class CategoryViewController: UICollectionViewController {
         
         for obj in productList.findObjects(){
             var inLst:[String] = []
-            inLst.append(obj["Hierarchy"] as! String)
-            inLst.append(obj["itemImage"] as! String)
+            inLst.append(obj["Hierarchy"] as String)
+            inLst.append(obj["itemImage"] as String)
             ret.append(inLst)
         }
         return ret
     }
-    /*
-    func getSubCategories( productList: PFQuery , categoryName: String) -> [String]{
-        var list = [String : Bool ] ()
-        var nextSetOfCategories = [String] ()
-        
-        for obj in productList.findObjects(){
-            var heirarchy =  obj["Hierarchy"] as String
-            
-            let needle: Character = "."
-            var end=false
-            var found=false
-            
-            while(!end)
-            {
-                if let idx = find(heirarchy,needle) {
-                    var searchCategory = heirarchy.substringToIndex(idx)
-                    //println("Search Category:\(searchCategory)")
-                    if(categoryName==searchCategory)
-                    {
-                        println("Reached the current level")
-                        found=true
-                    }
-                    else if(found==true)
-                    {
-                        if(list.indexForKey(searchCategory)==nil)
-                        {
-                            println("Required: \(searchCategory)")
-                            list.updateValue( true , forKey: heirarchy.substringToIndex(idx))
-                        }
-                        end=true
-                    }
-                    
-                    heirarchy.removeAtIndex(idx)
-                    heirarchy=heirarchy.substringFromIndex(idx)
-                    println("Heirarchy: \(heirarchy)")
-                    
-                }
-                else
-                {
-                    if(found==true)  // Considers the last level listing. i.e the product itself
-                    {
-                        list.updateValue(true , forKey:heirarchy )
-                        
-                    }
-                    //println("Not found")
-                    end=true
-                }
-                println(heirarchy)
-            }
-            println(list.count)
-            
-        }
-        for key in list.keys
-        {
-            nextSetOfCategories.append(key)
-        }
-        
-        return nextSetOfCategories
-    }
-    */
-    // Gets the next set of categories for the given input category
+        // Gets the next set of categories for the given input category
     func retrieveListing(categoryName :String) ->[[String]]{
 
         println("Retrieving list for \(categoryName)")
@@ -183,13 +123,13 @@ class CategoryViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CategoryViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryViewCell
     
-        var itemStr:String = (categoryList[indexPath.item][0]) as! String
-        itemStr = itemStr.replace(".*\\.", template: "")
+        var itemStr:String = (categoryList[indexPath.item][0]) as String
+        //itemStr = itemStr.replace(".*\\.", template: "")
         
         cell.categoryNameLabel.text = "\(itemStr)"
-        cell.categoryImage.image=UIImage(data: NSData(contentsOfURL: NSURL(string: (categoryList[indexPath.item][1]) as! String)!)!)
+        cell.categoryImage.image=UIImage(data: NSData(contentsOfURL: NSURL(string: (categoryList[indexPath.item][1]) as String)!)!)
       
       
         //cell.categoryNameLabel.text = "\(subCategoryList[categorySelected][indexPath.item])"
@@ -213,12 +153,21 @@ class CategoryViewController: UICollectionViewController {
     
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        
+        /*
         hierarchyStack.push(currentRoot)
-        currentRoot = (categoryList[indexPath.item][0]) as! String
+        currentRoot = (categoryList[indexPath.item][0]) as String
         navigationItem.title=currentRoot.stringByReplacingOccurrencesOfString(".", withString:" > ", options: NSStringCompareOptions.LiteralSearch, range: nil)
         categoryList = retrieveListing("\(currentRoot)")
         self.collectionView?.reloadData()
+        */
+        
+        let nextLevel : CategoryCollectionView = CategoryCollectionView(nibName:"CategoryCollectionView",bundle:nil) as CategoryCollectionView
+        
+        nextLevel.title = "Collection View Next Level"
+        
+        self.navigationController?.pushViewController(nextLevel, animated: true)
+        
+        
         return true
     }
 
