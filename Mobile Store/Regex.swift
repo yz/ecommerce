@@ -35,6 +35,7 @@ struct Regex {
     }
     
     mutating func updateRegex() {
+        //NADA
         regex = NSRegularExpression(pattern: pattern, options: expressionOptions, error: nil)
     }
 }
