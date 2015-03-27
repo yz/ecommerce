@@ -55,6 +55,11 @@ class CategoryCollectionView: UICollectionViewController{
         //#warning Incomplete method implementation -- Return the number of items in the section
         return 3
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        return CGSizeMake(180,180)
+    }
 
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

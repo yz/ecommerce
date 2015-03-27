@@ -12,4 +12,7 @@ class CategoryPrototypeCell: UICollectionViewCell {
     @IBOutlet weak var categoryImage: UIImageView!
     
     @IBOutlet weak var categoryTitle: UILabel!
+    
+    
+    
 }
