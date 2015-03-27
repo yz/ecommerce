@@ -44,8 +44,8 @@ class CategoryViewController: UICollectionViewController {
         
         if(productList.countObjects() != 0){//Object exists
             for obj in productList.findObjects(){
-                row = obj as! PFObject
-                if row["productType"] as! Int == 1{
+                row = obj as PFObject
+                if row["productType"] as Int == 1{
                     row.deleteInBackgroundWithBlock(nil)}
             }
         }
@@ -83,7 +83,7 @@ class CategoryViewController: UICollectionViewController {
             row["Hierarchy"] = hrchy
         }else{//Modify existing object
             for obj in productList.findObjects(){
-                row = obj as! PFObject
+                row = obj as PFObject
             }
         }
         
@@ -200,7 +200,7 @@ class CategoryViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryViewCell
     
         var itemStr:String = (categoryList[indexPath.item][0]) as String
-        //itemStr = itemStr.replace(".*\\.", template: "")
+        itemStr = itemStr.replace(".*\\.", template: "")
         
         cell.categoryNameLabel.text = "\(itemStr)"
         cell.categoryImage.image=UIImage(data: NSData(contentsOfURL: NSURL(string: (categoryList[indexPath.item][1]) as String)!)!)
