@@ -7,9 +7,80 @@
 //
 
 import UIKit
+import Parse
 
 
 class CategoryCollectionView: UICollectionViewController{
+    
+    
+    
+    var categoryList = []
+    var productList = []
+    var currentCategory = ""
+    
+    func getSubCategoriesObjectIDs( productList: PFQuery , categoryName: String) -> [[String]]{
+        var ret: [[String]] = []
+        
+        for obj in productList.findObjects(){
+            var inLst:[String] = []
+            inLst.append(obj["Hierarchy"] as String)
+            inLst.append(obj["itemImage"] as String)
+            ret.append(inLst)
+        }
+        return ret
+    }
+    
+    func isLastLevel( productList : PFQuery) -> Bool
+    {
+        var obj = productList.getFirstObject()
+        
+        if( obj["productType"] as Int == 1)
+        {
+           return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    
+    func isLastLevel( categoryName :String) -> Bool
+    {
+        
+        
+        var productList:PFQuery = PFQuery(className: "Product");
+        //var matchPattern = ".*\(categoryName).*"
+        var matchPattern = "\(categoryName)\\.[^\\.]*$"
+        
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        if(productList.countObjects()==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
+    // Gets the next set of categories for the given input category
+    func retrieveListing(categoryName :String) ->[[String]]{
+        
+        println("Retrieving list for \(categoryName)")
+        var productList:PFQuery = PFQuery(className: "Product");
+        
+        
+        //var matchPattern = ".*\(categoryName).*"
+        var matchPattern = "\(categoryName)\\.[^\\.]*$"
+        
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)  // retrieves the set of products that matched the input
+    
+        
+        return getSubCategoriesObjectIDs(productList, categoryName : categoryName)
+        //return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
+    }
 
     
     override func viewDidLoad() {
@@ -22,8 +93,22 @@ class CategoryCollectionView: UICollectionViewController{
         
         
         let nibCategoryCell = UINib(nibName: "CategoryPrototypeCell", bundle: nil)
-        
         collectionView?.registerNib(nibCategoryCell, forCellWithReuseIdentifier: "CategoryCell")
+        
+        Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
+        if(currentCategory=="")
+        {
+            self.title = "Categories"
+            currentCategory = "All"
+            
+        }
+        
+        categoryList = retrieveListing(currentCategory)
+        
+        if(categoryList.count==0)
+        {
+            println(isLastLevel(currentCategory))
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -53,12 +138,12 @@ class CategoryCollectionView: UICollectionViewController{
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        return 3
+        return categoryList.count
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        return CGSizeMake(180,180)
+        return CGSizeMake(182,182)
     }
 
     
@@ -66,10 +151,16 @@ class CategoryCollectionView: UICollectionViewController{
         
         let cell : CategoryPrototypeCell = collectionView.dequeueReusableCellWithReuseIdentifier("CategoryCell", forIndexPath: indexPath) as CategoryPrototypeCell
         
-        cell.backgroundColor = UIColor.grayColor()
+        cell.backgroundColor = UIColor.whiteColor()
         // Configure the cell
+        var itemStr:String = (categoryList[indexPath.item][0]) as String
+        itemStr = itemStr.replace(".*\\.", template: "")
+        
+        cell.categoryTitle.text = "\(itemStr)"
+        cell.categoryImage.image=UIImage(data: NSData(contentsOfURL: NSURL(string: (categoryList[indexPath.item][1]) as String)!)!)
 
-            return cell
+        
+        return cell
 
         
     }
@@ -87,22 +178,36 @@ class CategoryCollectionView: UICollectionViewController{
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         
+        var title = categoryList[indexPath.item][0] as String
+        title = title.replace(".*\\.", template: "")
         
-        let nextCategoryLevel : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)
+        if(isLastLevel(title))   // If its the last level load a different screen
+        {
+                println("Just before transition to last level")
+                let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetailView",bundle:nil)
+                productDetailView.title = title
+                productDetailView.productTitle?.text = title
+                self.navigationController?.pushViewController(productDetailView, animated: true)
+            
+
+            return true
+        }
         
+        
+            let nextCategoryLevel : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)
+            
+            nextCategoryLevel.title = title
+            nextCategoryLevel.currentCategory = title
+            nextCategoryLevel.categoryList = categoryList
         self.navigationController?.pushViewController(nextCategoryLevel, animated: true)
         
+            return true
         
-        return true
     }
     
     
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
 
+    /*
     override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
         return false
     }
