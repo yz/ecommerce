@@ -13,12 +13,12 @@ import Parse
 class CategoryCollectionView: UICollectionViewController{
     
     
-    
+    var prodList : PFQuery!
     var categoryList = []
     var productList = []
     var currentCategory = ""
     
-    func getSubCategoriesObjectIDs( productList: PFQuery , categoryName: String) -> [[String]]{
+    func getSubCategoriesObjectIDs( productList: PFQuery) -> [[String]]{
         var ret: [[String]] = []
         
         for obj in productList.findObjects(){
@@ -34,7 +34,7 @@ class CategoryCollectionView: UICollectionViewController{
     {
         var obj = productList.getFirstObject()
         
-        if( obj["productType"] as Int == 1)
+        if( productList.countObjects()==0)
         {
            return true;
         }
@@ -78,7 +78,7 @@ class CategoryCollectionView: UICollectionViewController{
         productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)  // retrieves the set of products that matched the input
     
         
-        return getSubCategoriesObjectIDs(productList, categoryName : categoryName)
+        return getSubCategoriesObjectIDs(productList)
         //return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
     }
 
@@ -102,13 +102,17 @@ class CategoryCollectionView: UICollectionViewController{
             currentCategory = "All"
             
         }
-        
-        categoryList = retrieveListing(currentCategory)
-        
-        if(categoryList.count==0)
+        if(prodList != nil)
         {
-            println(isLastLevel(currentCategory))
+            println("Using data from the previous view controller")
+            categoryList = getSubCategoriesObjectIDs(prodList)
         }
+        else
+        {
+            categoryList = retrieveListing(currentCategory)
+        }
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -181,10 +185,16 @@ class CategoryCollectionView: UICollectionViewController{
         var title = categoryList[indexPath.item][0] as String
         title = title.replace(".*\\.", template: "")
         
-        if(isLastLevel(title))   // If its the last level load a different screen
+        var productList:PFQuery = PFQuery(className: "Product");
+        //var matchPattern = ".*\(categoryName).*"
+        var matchPattern = "\(title)\\.[^\\.]*$"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        
+        
+        if(isLastLevel(productList))   // If its the last level load a different screen
         {
                 println("Just before transition to last level")
-                let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetailView",bundle:nil)
+                let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetail",bundle:nil)
                 productDetailView.title = title
                 productDetailView.productTitle?.text = title
                 self.navigationController?.pushViewController(productDetailView, animated: true)
@@ -195,7 +205,7 @@ class CategoryCollectionView: UICollectionViewController{
         
         
             let nextCategoryLevel : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)
-            
+            nextCategoryLevel.prodList = productList
             nextCategoryLevel.title = title
             nextCategoryLevel.currentCategory = title
             nextCategoryLevel.categoryList = categoryList
