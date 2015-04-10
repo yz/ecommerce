@@ -22,10 +22,24 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
+                  symbolName = "Mobile_Store.TableViewController.cell1.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UITableViewCell&gt;"
+                  moduleName = "Mobile Store"
+                  urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
+                  timestampString = "449733555.534595"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
                   symbolName = "Mobile_Store.TableViewController.cell1.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UITableViewCell&gt;"
                   moduleName = "Mobile Store"
                   urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
-                  timestampString = "449157700.312897"
+                  timestampString = "449733555.534792"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -39,7 +53,7 @@
                   symbolName = "Mobile_Store.TableViewController.cell1.materializeForSet : weak Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UITableViewCell&gt;"
                   moduleName = "Mobile Store"
                   urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
-                  timestampString = "449157700.313084"
+                  timestampString = "449733555.534954"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -53,7 +67,7 @@
                   symbolName = "Mobile_Store.TableViewController.init (Mobile_Store.TableViewController.Type)(style : C.UITableViewStyle) -&gt; Mobile_Store.TableViewController"
                   moduleName = "Mobile Store"
                   urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
-                  timestampString = "449157700.313317"
+                  timestampString = "449733555.535171"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -67,7 +81,7 @@
                   symbolName = "Mobile_Store.TableViewController.init (Mobile_Store.TableViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; Mobile_Store.TableViewController"
                   moduleName = "Mobile Store"
                   urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
-                  timestampString = "449157700.313665"
+                  timestampString = "449733555.535478"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -81,7 +95,7 @@
                   symbolName = "Mobile_Store.TableViewController.init (Mobile_Store.TableViewController.Type)() -&gt; Mobile_Store.TableViewController"
                   moduleName = "Mobile Store"
                   urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
-                  timestampString = "449157700.31413"
+                  timestampString = "449733555.535723"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -95,7 +109,7 @@
                   symbolName = "Mobile_Store.TableViewController.init (Mobile_Store.TableViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; Mobile_Store.TableViewController"
                   moduleName = "Mobile Store"
                   urlString = "file:///Users/ashwinkarthiksrinivasan/Documents/ecommerce/Mobile%20Store/TableViewController.swift"
-                  timestampString = "449157700.314292"
+                  timestampString = "449733555.536199"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
@@ -117,7 +131,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
             endingLineNumber = "100"
-            landmarkName = "didReceiveMemoryWarning()"
+            landmarkName = "getSubCategoriesObjectIDs(_:categoryName:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -133,8 +147,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "122"
             endingLineNumber = "122"
-            landmarkName = "collectionView(_:numberOfItemsInSection:)"
-            landmarkType = "5">
+            landmarkName = "CategoryViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -149,7 +163,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
             endingLineNumber = "87"
-            landmarkName = "viewDidLoad()"
+            landmarkName = "addOrModifyItem(_:properties:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -268,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mobile Store/CategoryCollectionView.swift"
-            timestampString = "449157634.291468"
+            timestampString = "450327771.087991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "collectionView(_:layout:sizeForItemAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>

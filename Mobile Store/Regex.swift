@@ -43,7 +43,7 @@ struct Regex {
 
 extension String {
     func matchRegex(pattern: Regex) -> Bool {
-        let range: NSRange = NSMakeRange(0, count(self))
+        let range: NSRange = NSMakeRange(0, distance(self.startIndex,self.endIndex))
         if pattern.regex != nil {
             let matches: [AnyObject] = pattern.regex!.matchesInString(self, options: pattern.matchingOptions, range: range)
             return matches.count > 0
@@ -57,7 +57,7 @@ extension String {
     
     func replaceRegex(pattern: Regex, template: String) -> String {
         if self.matchRegex(pattern) {
-            let range: NSRange = NSMakeRange(0, count(self))
+            let range: NSRange = NSMakeRange(0, distance(self.startIndex,self.endIndex))
             if pattern.regex != nil {
                 return pattern.regex!.stringByReplacingMatchesInString(self, options: pattern.matchingOptions, range: range, withTemplate: template)
             }

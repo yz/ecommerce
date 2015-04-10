@@ -23,30 +23,20 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r4R-KN-swC">
-                    <rect key="frame" x="150" y="28" width="300" height="300"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r4R-KN-swC">
+                    <rect key="frame" x="58" y="38" width="300" height="300"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="7v9-CW-Y0q"/>
-                        <constraint firstAttribute="height" constant="300" id="oSa-Bb-qwQ"/>
-                        <constraint firstAttribute="width" secondItem="r4R-KN-swC" secondAttribute="height" multiplier="1:1" id="xqk-EH-XeT"/>
+                        <constraint firstAttribute="width" constant="300" id="NMo-9a-UBE"/>
+                        <constraint firstAttribute="width" secondItem="r4R-KN-swC" secondAttribute="height" multiplier="1:1" id="Qdu-PD-Ncx"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="r4R-KN-swC" secondAttribute="trailing" priority="250" constant="150" id="GIp-JC-52x"/>
-                <constraint firstAttribute="centerY" secondItem="r4R-KN-swC" secondAttribute="centerY" constant="122" id="O0H-Ri-wfe"/>
-                <constraint firstAttribute="centerY" secondItem="r4R-KN-swC" secondAttribute="centerY" constant="122" id="Y6f-AR-SDK"/>
-                <constraint firstItem="r4R-KN-swC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="250" constant="150" id="hzl-SG-vOG"/>
-                <constraint firstItem="r4R-KN-swC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="28" id="kRl-ma-7Zm"/>
-                <constraint firstAttribute="bottom" secondItem="r4R-KN-swC" secondAttribute="bottom" constant="272" id="r4T-ax-MJ0"/>
+                <constraint firstItem="r4R-KN-swC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="28" id="YgW-h0-X8M"/>
+                <constraint firstAttribute="bottom" secondItem="r4R-KN-swC" secondAttribute="bottom" constant="272" id="Z9m-dE-jEP"/>
+                <constraint firstAttribute="centerX" secondItem="r4R-KN-swC" secondAttribute="centerX" id="lzz-Ky-ktf"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="O0H-Ri-wfe"/>
-                    <exclude reference="Y6f-AR-SDK"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="372" y="294"/>
         </view>
     </objects>

@@ -121,7 +121,7 @@
         <!--Title-->
         <scene sceneID="HAz-uP-jNL">
             <objects>
-                <collectionViewController storyboardIdentifier="CategoryViewController" id="eMO-dU-MnO" customClass="CategoryViewController" customModule="Mobile_Store" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="CategoryViewController" id="eMO-dU-MnO" customClass="CategoryCollectionView" customModule="Mobile_Store" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ToG-1t-4cP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -186,11 +186,11 @@
             </objects>
             <point key="canvasLocation" x="742" y="-1311"/>
         </scene>
-        <!--First-->
+        <!--Categories-->
         <scene sceneID="Lgl-TQ-ybv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1NC-AK-KjR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Categories" image="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yxy-60-wXR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

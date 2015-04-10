@@ -15,6 +15,7 @@ class ProductDetailViewController: UIViewController {
     
     @IBOutlet var productImage: UIImageView!
     
+    
     @IBOutlet var productTitle: UILabel!
     
     var object : PFObject!
@@ -23,9 +24,9 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        println(self.title!)
-        productTitle.text = self.title!
+        println(productTitle.text?)
         
+        /*
     Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
        
         var reqObject:PFQuery = PFQuery(className: "Product");
@@ -40,7 +41,7 @@ class ProductDetailViewController: UIViewController {
         productImage.sizeToFit()
 
         
-        
+        */
         
         
     }
