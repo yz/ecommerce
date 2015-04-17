@@ -42,12 +42,17 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         
         let newLogoLogin  = UILabel()
         newLogoLogin.text = "MobileWare"
-        self.loginViewController.logInView.logo = newLogoLogin
+        self.loginViewController.fields =  PFLogInFields.PasswordForgotten | PFLogInFields.UsernameAndPassword | PFLogInFields.LogInButton | PFLogInFields.SignUpButton
+         self.loginViewController.logInView.logo = newLogoLogin
         let newLogoSignup  = UILabel()
         newLogoSignup.text = "MobileWare"
         self.signupViewController.signUpView.logo = newLogoSignup
-        loginNewOrLogout()
+        //loginNewOrLogout()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        loginNewOrLogout()
     }
     
     override func didReceiveMemoryWarning() {

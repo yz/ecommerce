@@ -194,7 +194,7 @@ class CategoryCollectionView: UICollectionViewController{
         if(isLastLevel(productList))   // If its the last level load a different screen
         {
                 println("Just before transition to last level")
-                let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetail",bundle:nil)
+                let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetailView",bundle:nil)
                 productDetailView.title = title
                 productDetailView.productTitle?.text = title
                 self.navigationController?.pushViewController(productDetailView, animated: true)
