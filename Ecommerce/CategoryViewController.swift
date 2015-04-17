@@ -41,7 +41,6 @@ class CategoryViewController: UICollectionViewController {
         var productList:PFQuery = PFQuery(className: "Product");
         var matchPattern = "\(hrchy)"
         productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
-        
         if(productList.countObjects() != 0){//Object exists
             for obj in productList.findObjects(){
                 row = obj as PFObject

@@ -7,7 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3250D3EC488DC0FDE84771B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D107CC1D609527AE6D6079AA /* libPods.a */; };
+		610F79641AE15D5E006B8C6E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F795E1AE15D5E006B8C6E /* Bolts.framework */; };
+		610F79651AE15D5E006B8C6E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F795F1AE15D5E006B8C6E /* Parse.framework */; };
+		610F79661AE15D5E006B8C6E /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F79601AE15D5E006B8C6E /* ParseCrashReporting.framework */; };
+		610F79691AE15D5E006B8C6E /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F79631AE15D5E006B8C6E /* ParseUI.framework */; };
+		610F79991AE16483006B8C6E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F79981AE16483006B8C6E /* Social.framework */; };
+		61248F891AE1587D003473DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F881AE1587D003473DE /* libsqlite3.dylib */; };
+		61248F8B1AE1588B003473DE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F8A1AE1588B003473DE /* libz.dylib */; };
+		61248F8D1AE158AF003473DE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F8C1AE158AF003473DE /* StoreKit.framework */; };
+		61248F8F1AE158BD003473DE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F8E1AE158BD003473DE /* Security.framework */; };
+		61248F911AE158C9003473DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F901AE158C9003473DE /* QuartzCore.framework */; };
+		61248F931AE158DB003473DE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F921AE158DB003473DE /* MobileCoreServices.framework */; };
+		61248F951AE158E7003473DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F941AE158E7003473DE /* CoreLocation.framework */; };
+		61248F971AE158F4003473DE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F961AE158F4003473DE /* CFNetwork.framework */; };
+		61248F991AE15903003473DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F981AE15903003473DE /* AudioToolbox.framework */; };
+		61248F9B1AE15919003473DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F9A1AE15919003473DE /* SystemConfiguration.framework */; };
+		61248F9D1AE15928003473DE /* libdbm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F9C1AE15928003473DE /* libdbm.dylib */; };
+		61248F9F1AE15936003473DE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61248F9E1AE15936003473DE /* CoreData.framework */; };
+		61F080251AE164FD006D3480 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F080241AE164FD006D3480 /* Accounts.framework */; };
 		9C8CFDED1AD82C2B00E322E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CFDEC1AD82C2B00E322E7 /* Images.xcassets */; };
 		9C8CFDF01AD82C2B00E322E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CFDEE1AD82C2B00E322E7 /* LaunchScreen.xib */; };
 		9C8CFDFC1AD82C2B00E322E7 /* EcommerceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8CFDFB1AD82C2B00E322E7 /* EcommerceTests.swift */; };
@@ -45,8 +62,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		253548FE9AC4DA6127B4C46A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		4861C3FB00023B29B5971384 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		610F795E1AE15D5E006B8C6E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library/Bolts.framework"; sourceTree = "<group>"; };
+		610F795F1AE15D5E006B8C6E /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library/Parse.framework"; sourceTree = "<group>"; };
+		610F79601AE15D5E006B8C6E /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "parse-library/ParseCrashReporting.framework"; sourceTree = "<group>"; };
+		610F79631AE15D5E006B8C6E /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "parse-library/ParseUI.framework"; sourceTree = "<group>"; };
+		610F79981AE16483006B8C6E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		61248F881AE1587D003473DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		61248F8A1AE1588B003473DE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		61248F8C1AE158AF003473DE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		61248F8E1AE158BD003473DE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		61248F901AE158C9003473DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		61248F921AE158DB003473DE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		61248F941AE158E7003473DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		61248F961AE158F4003473DE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		61248F981AE15903003473DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		61248F9A1AE15919003473DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		61248F9C1AE15928003473DE /* libdbm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdbm.dylib; path = usr/lib/libdbm.dylib; sourceTree = SDKROOT; };
+		61248F9E1AE15936003473DE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		61F080241AE164FD006D3480 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		9C8CFDDE1AD82C2B00E322E7 /* Ecommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ecommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C8CFDE21AD82C2B00E322E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C8CFDEC1AD82C2B00E322E7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -76,7 +109,6 @@
 		9C8CFE181AD82CA900E322E7 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9C8CFE191AD82CA900E322E7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9C92B3031AE091E70044E610 /* CustomPFLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPFLogInViewController.m; sourceTree = "<group>"; };
-		D107CC1D609527AE6D6079AA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +116,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3250D3EC488DC0FDE84771B5 /* libPods.a in Frameworks */,
+				61F080251AE164FD006D3480 /* Accounts.framework in Frameworks */,
+				610F79991AE16483006B8C6E /* Social.framework in Frameworks */,
+				61248F8B1AE1588B003473DE /* libz.dylib in Frameworks */,
+				61248F891AE1587D003473DE /* libsqlite3.dylib in Frameworks */,
+				61248F9D1AE15928003473DE /* libdbm.dylib in Frameworks */,
+				61248F9F1AE15936003473DE /* CoreData.framework in Frameworks */,
+				61248F9B1AE15919003473DE /* SystemConfiguration.framework in Frameworks */,
+				61248F991AE15903003473DE /* AudioToolbox.framework in Frameworks */,
+				61248F971AE158F4003473DE /* CFNetwork.framework in Frameworks */,
+				61248F951AE158E7003473DE /* CoreLocation.framework in Frameworks */,
+				61248F931AE158DB003473DE /* MobileCoreServices.framework in Frameworks */,
+				61248F911AE158C9003473DE /* QuartzCore.framework in Frameworks */,
+				61248F8F1AE158BD003473DE /* Security.framework in Frameworks */,
+				61248F8D1AE158AF003473DE /* StoreKit.framework in Frameworks */,
+				610F79641AE15D5E006B8C6E /* Bolts.framework in Frameworks */,
+				610F79651AE15D5E006B8C6E /* Parse.framework in Frameworks */,
+				610F79661AE15D5E006B8C6E /* ParseCrashReporting.framework in Frameworks */,
+				610F79691AE15D5E006B8C6E /* ParseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,22 +147,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A4FDCF37B3476E36A47AB94 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				253548FE9AC4DA6127B4C46A /* Pods.debug.xcconfig */,
-				4861C3FB00023B29B5971384 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		9C8CFDD51AD82C2B00E322E7 = {
 			isa = PBXGroup;
 			children = (
 				9C8CFDE01AD82C2B00E322E7 /* Ecommerce */,
 				9C8CFDF81AD82C2B00E322E7 /* EcommerceTests */,
 				9C8CFDDF1AD82C2B00E322E7 /* Products */,
-				2A4FDCF37B3476E36A47AB94 /* Pods */,
 				F250D5942F9EFB66D69F5CF1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -187,7 +226,24 @@
 		F250D5942F9EFB66D69F5CF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D107CC1D609527AE6D6079AA /* libPods.a */,
+				61F080241AE164FD006D3480 /* Accounts.framework */,
+				610F79981AE16483006B8C6E /* Social.framework */,
+				610F795E1AE15D5E006B8C6E /* Bolts.framework */,
+				610F795F1AE15D5E006B8C6E /* Parse.framework */,
+				610F79601AE15D5E006B8C6E /* ParseCrashReporting.framework */,
+				610F79631AE15D5E006B8C6E /* ParseUI.framework */,
+				61248F9E1AE15936003473DE /* CoreData.framework */,
+				61248F9C1AE15928003473DE /* libdbm.dylib */,
+				61248F9A1AE15919003473DE /* SystemConfiguration.framework */,
+				61248F981AE15903003473DE /* AudioToolbox.framework */,
+				61248F961AE158F4003473DE /* CFNetwork.framework */,
+				61248F941AE158E7003473DE /* CoreLocation.framework */,
+				61248F921AE158DB003473DE /* MobileCoreServices.framework */,
+				61248F901AE158C9003473DE /* QuartzCore.framework */,
+				61248F8E1AE158BD003473DE /* Security.framework */,
+				61248F8C1AE158AF003473DE /* StoreKit.framework */,
+				61248F8A1AE1588B003473DE /* libz.dylib */,
+				61248F881AE1587D003473DE /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,11 +255,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C8CFDFF1AD82C2B00E322E7 /* Build configuration list for PBXNativeTarget "Ecommerce" */;
 			buildPhases = (
-				8357B9C3076BF98E56E5E979 /* Check Pods Manifest.lock */,
 				9C8CFDDA1AD82C2B00E322E7 /* Sources */,
 				9C8CFDDB1AD82C2B00E322E7 /* Frameworks */,
 				9C8CFDDC1AD82C2B00E322E7 /* Resources */,
-				B1762EC81CBF1609635B8073 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -295,39 +349,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8357B9C3076BF98E56E5E979 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B1762EC81CBF1609635B8073 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9C8CFDDA1AD82C2B00E322E7 /* Sources */ = {
@@ -461,36 +482,46 @@
 		};
 		9C8CFE001AD82C2B00E322E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 253548FE9AC4DA6127B4C46A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ecommerce",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/parse-library",
 				);
 				INFOPLIST_FILE = Ecommerce/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ecommerce/Ecommerce-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
 		9C8CFE011AD82C2B00E322E7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4861C3FB00023B29B5971384 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ecommerce",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/parse-library",
 				);
 				INFOPLIST_FILE = Ecommerce/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ecommerce/Ecommerce-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
