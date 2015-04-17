@@ -26,7 +26,7 @@ class ProductDetailViewController: UIViewController {
         
         println(productTitle.text?)
         
-        /*
+        
     Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
        
         var reqObject:PFQuery = PFQuery(className: "Product");
@@ -37,11 +37,11 @@ class ProductDetailViewController: UIViewController {
         var imageLink = reqObject.getFirstObject()["itemImage"] as String
         
         productImage.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
+        productTitle.text = self.title!
         
-        productImage.sizeToFit()
 
         
-        */
+        
         
         
     }

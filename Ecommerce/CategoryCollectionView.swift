@@ -196,7 +196,6 @@ class CategoryCollectionView: UICollectionViewController{
                 println("Just before transition to last level")
                 let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetailView",bundle:nil)
                 productDetailView.title = title
-                productDetailView.productTitle?.text = title
                 self.navigationController?.pushViewController(productDetailView, animated: true)
             
 
@@ -217,14 +216,6 @@ class CategoryCollectionView: UICollectionViewController{
     
     
 
-    /*
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
     
-    }
-    */
 
 }

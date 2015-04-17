@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A352F9C2-8EFB-444B-AD76-B7EB95448802</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Ecommerce</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</key>
+		<string>https://github.com/yz/ecommerce.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Ecommerce.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/yz/ecommerce.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ecommerce</string>
+		</dict>
+	</array>
+</dict>
+</plist>
