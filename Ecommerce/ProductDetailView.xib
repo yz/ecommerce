@@ -30,6 +30,15 @@
                         <constraint firstAttribute="width" secondItem="r4R-KN-swC" secondAttribute="height" multiplier="1:1" id="Qdu-PD-Ncx"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUN-Im-kRQ">
+                    <rect key="frame" x="79" y="519" width="173" height="30"/>
+                    <state key="normal" title="Add to cart">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addToCart:" destination="-1" eventType="touchUpInside" id="fj5-1p-t1J"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
