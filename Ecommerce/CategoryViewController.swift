@@ -33,7 +33,54 @@ var currentRoot:String = "All"
 var hierarchyStack = Stack<String>()
 
 class CategoryViewController: UICollectionViewController {
+   
+    //REMOVE CODE ! -- ONLY FOR TESTING PURPOSE!
+    func init_cart()->(){
+        var custList:PFQuery = PFQuery(className: "Customer");
+        custList = custList.whereKey("customerId", equalTo: 123456789)
+        var customer:PFObject = custList.getFirstObject() as PFObject
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        var cart:PFObject = cartList.findObjects()[0] as PFObject
+        //cart["Customer"] = customer
+        var pfrCartCustomer:PFRelation = cart.relationForKey("Customer")
+        pfrCartCustomer.addObject(customer)
+        cart.saveEventually(nil)
+        //cart.saveInBackgroundWithBlock(nil)
+    }
     
+    func addItemToCart(usr:Int, path:String)->(){
+        var hrchy = path
+        path.replace(".*\\.", template: "")
+        var row:PFObject! = nil
+        var productList:PFQuery = PFQuery(className: "Product");
+        var custList:PFQuery = PFQuery(className: "Customer");
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        
+        
+        var matchPattern = "\(hrchy)"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        custList = custList.whereKey("customerId", equalTo: usr)
+        
+        if(productList.countObjects() != 0 && custList.countObjects() == 1){//Objects exists
+            
+            var customer:PFObject = custList.getFirstObject() as PFObject
+            cartList = cartList.whereKey("Customer", equalTo: customer)
+            var cart:PFObject = cartList.getFirstObject() as PFObject
+            
+            var currCart:PFRelation = cart.relationForKey("Product")
+            
+            for obj in productList.findObjects(){
+                row = obj as PFObject
+                if row["productType"] as Int == 1{//Valid item selected, add to cart
+                    currCart.addObject(row)
+                }
+            }
+            
+            cart.saveEventually(nil)
+            //cart.saveInBackgroundWithBlock(nil)
+        }
+    }
+
     func dropItem(path:String)->(){
         var hrchy = path
         path.replace(".*\\.", template: "")
@@ -164,8 +211,9 @@ class CategoryViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
         
-        addOrModifyItem(["All", "Toys", "Panda"], properties: ["itemImage":"http://images4.fanpop.com/image/photos/16200000/Pandas-pandas-16256344-600-750.jpg"])
-    }
+        //addOrModifyItem(["All", "Toys", "Panda"], properties: ["itemImage":"http://images4.fanpop.com/image/photos/16200000/Pandas-pandas-16256344-600-750.jpg"])
+        init_cart()
+        addItemToCart(123456789, path: "All.Electronics.Phones.Samsung Galaxy")    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
