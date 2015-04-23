@@ -18,6 +18,22 @@ class ProductDetailViewController: UIViewController {
     
     @IBOutlet var productTitle: UILabel!
     
+    @IBAction func addToCart(sender: AnyObject) {
+        
+        if(PFUser.currentUser()==nil)
+        {
+            println("No user Logged in")
+            
+            let loginSignUpView : LoginSignUpViewController = LoginSignUpViewController(nibName:"LoginSignUpViewController",bundle:nil)
+            self.navigationController?.pushViewController(loginSignUpView, animated: true)
+            
+            
+        }
+        else
+        {
+            println("You are \(PFUser.currentUser().username)")
+        }
+    }
     var object : PFObject!
     
    
