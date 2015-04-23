@@ -15,6 +15,7 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
     var signupViewController : PFSignUpViewController = PFSignUpViewController()
     
     @IBOutlet var btnLogoutObj: UIButton!
+    
     @IBOutlet weak var btnDeleteUsr: UIButton!
     
     @IBAction func btnLogout(sender: AnyObject) {
