@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-GY-RQ3">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-GY-RQ3">
                                 <rect key="frame" x="177" y="241" width="246" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="246" id="uTX-bW-5FS"/>
@@ -29,16 +29,30 @@
                                     <action selector="btnLogout:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="e4p-cx-7d9"/>
                                 </connections>
                             </button>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apg-ws-8bO">
+                                <rect key="frame" x="177" y="277" width="246" height="35"/>
+                                <state key="normal" title="Delete ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnDeleteAccount:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="ltY-JS-0bw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZZw-GY-RQ3" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="19q-vW-u2b"/>
+                            <constraint firstItem="apg-ws-8bO" firstAttribute="top" secondItem="ZZw-GY-RQ3" secondAttribute="bottom" constant="1" id="8wZ-Fp-wPr"/>
+                            <constraint firstItem="apg-ws-8bO" firstAttribute="leading" secondItem="ZZw-GY-RQ3" secondAttribute="leading" id="HBu-nq-Y3A"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="ZZw-GY-RQ3" secondAttribute="bottom" constant="275" id="WRo-tN-Ltf"/>
                             <constraint firstItem="ZZw-GY-RQ3" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="177" id="cRS-Jq-4el"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="apg-ws-8bO" secondAttribute="bottom" constant="239" id="mzD-Jv-dpc"/>
+                            <constraint firstItem="apg-ws-8bO" firstAttribute="trailing" secondItem="ZZw-GY-RQ3" secondAttribute="trailing" id="syr-NY-kW8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uqg-3h-hGS"/>
                     <connections>
+                        <outlet property="btnDeleteUsr" destination="apg-ws-8bO" id="vIl-8s-zHd"/>
                         <outlet property="btnLogoutObj" destination="ZZw-GY-RQ3" id="6NL-0c-kjj"/>
                     </connections>
                 </viewController>

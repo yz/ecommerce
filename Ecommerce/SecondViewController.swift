@@ -15,6 +15,7 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
     var signupViewController : PFSignUpViewController = PFSignUpViewController()
     
     @IBOutlet var btnLogoutObj: UIButton!
+    @IBOutlet weak var btnDeleteUsr: UIButton!
     
     @IBAction func btnLogout(sender: AnyObject) {
         if let tmp = PFUser.currentUser()
@@ -24,13 +25,42 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         loginNewOrLogout()
     }
     
+    @IBAction func btnDeleteAccount(sender: AnyObject) {
+        if let currentUser = PFUser.currentUser()
+        {
+            currentUser.fetch()
+            var users:PFQuery = PFQuery(className: "_User");
+            users = users.whereKey("email" , matchesRegex: currentUser["email"] as String)
+            
+            if(users.countObjects() != 0 && currentUser.isAuthenticated()){//Object exists
+                for usr in users.findObjects(){
+                    usr.deleteInBackgroundWithBlock(nil)
+                }
+            }
+            
+            PFUser.logOut()
+        }
+        loginNewOrLogout()
+    }
+    
+    
     func loginNewOrLogout(){
         if PFUser.currentUser()==nil
         {
             loginViewController.logInView.passwordField.text = ""
             self.presentViewController(loginViewController, animated: true, completion: nil)
         }else{
-            btnLogoutObj.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
+            if let verified = PFUser.currentUser().objectForKey("emailVerified") as? Bool{
+                if verified{
+                    btnLogoutObj.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
+                    btnDeleteUsr.setTitle("Delete \(PFUser.currentUser().username)", forState: nil)
+                    return
+                }
+            }
+            
+            PFUser.logOut()
+            var alert = UIAlertView(title: "First-time Login", message: "Please verify your e-mail before logging in", delegate: self, cancelButtonTitle: "Ok")
+            alert.show()
         }
     }
     
