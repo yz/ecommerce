@@ -33,31 +33,32 @@ class ProductDetailViewController: UIViewController {
         }
         else
         {
-            println("You are \(PFUser.currentUser().username)")
-            
+            let currentUser = PFUser.currentUser()
+            currentUser.fetch()
+            println("You are \(currentUser.username)")
+            addItemToCart(currentUser["email"] as String, path: hierarchy)
         }
     }
     
     
-    func addItemToCart(usr:Int, path:String)->(){
+    func addItemToCart(usr:String, path:String)->(){
         var hrchy = path
         path.replace(".*\\.", template: "")
         var row:PFObject! = nil
         var productList:PFQuery = PFQuery(className: "Product");
-        var custList:PFQuery = PFQuery(className: "Customer");
+        var custList:PFQuery = PFQuery(className: "_User");
         var cartList:PFQuery = PFQuery(className: "Cart");
         
         
         var matchPattern = "\(hrchy)"
         productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
-        custList = custList.whereKey("customerId", equalTo: usr)
+        custList = custList.whereKey("email", equalTo: usr)
         
         if(productList.countObjects() != 0 && custList.countObjects() == 1){//Objects exists
             
             var customer:PFObject = custList.getFirstObject() as PFObject
-            cartList = cartList.whereKey("Customer", equalTo: customer)
+            cartList = cartList.whereKey("customer", equalTo: customer)
             var cart:PFObject = cartList.getFirstObject() as PFObject
-            11
             var currCart:PFRelation = cart.relationForKey("Product")
             
             for obj in productList.findObjects(){

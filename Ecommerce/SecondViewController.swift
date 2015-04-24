@@ -121,8 +121,11 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         if PFUser.currentUser()==nil
         {
             PFUser.logOut()
+        }else{
+            println("Initializing cart for user---------")
+            init_cart(PFUser.currentUser())
         }
-        signUpController.dismissViewControllerAnimated( true, completion: nil)
+        signUpController.dismissViewControllerAnimated( false, completion: nil)
         loginNewOrLogout()
     }
     
@@ -130,6 +133,18 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         
     }
     
+    func init_cart(customer:PFUser)->(){
+        customer.fetch()
+        var custList:PFQuery = PFQuery(className: "_User");
+        custList = custList.whereKey("email", equalTo: customer["email"] as String)
+        var customer:PFObject = custList.getFirstObject() as PFObject
+        
+        //Add a new cart for first time user
+        var row:PFObject = PFObject(className:"Cart")
+        var pfrCartCustomer:PFRelation = row.relationForKey("customer")
+        pfrCartCustomer.addObject(customer)
+        row.saveInBackgroundWithBlock(nil)
+    }
     
 }
 
