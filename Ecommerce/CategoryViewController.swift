@@ -66,7 +66,7 @@ class CategoryViewController: UICollectionViewController {
             var customer:PFObject = custList.getFirstObject() as PFObject
             cartList = cartList.whereKey("Customer", equalTo: customer)
             var cart:PFObject = cartList.getFirstObject() as PFObject
-            
+            11
             var currCart:PFRelation = cart.relationForKey("Product")
             
             for obj in productList.findObjects(){

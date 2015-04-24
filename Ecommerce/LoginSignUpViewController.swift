@@ -30,7 +30,7 @@ class LoginSignUpViewController: UIViewController, PFLogInViewControllerDelegate
         if PFUser.currentUser()==nil
         {
             loginViewController.logInView.passwordField.text = ""
-            self.presentViewController(loginViewController, animated: true, completion: nil)
+            self.presentViewController(loginViewController, animated: false, completion: nil)
         }else{
             btnLogout.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
         }
@@ -53,7 +53,7 @@ class LoginSignUpViewController: UIViewController, PFLogInViewControllerDelegate
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         loginNewOrLogout()
     }
     

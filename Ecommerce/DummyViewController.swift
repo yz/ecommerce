@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class DummyViewController: UIViewController {
 
@@ -25,14 +27,15 @@ class DummyViewController: UIViewController {
     @IBAction func nextCollectionLevel(sender: UIButton) {
         println("Inside ....")
         
-        let nextLevel: CategoryCollectionView = CategoryCollectionView(nibName:"CategoryCollectionView", bundle:nil) as CategoryCollectionView
         
-        nextLevel.title = "From Dummy View Controller"
+        let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Product")
+        self.navigationController?.pushViewController(shoppingCart, animated: false)
         
-        self.navigationController?.pushViewController(nextLevel, animated: false)
-        
-        
-        
+        /*
+        let shoppingCart : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)
+        self.navigationController?.pushViewController(shoppingCart, animated: false)
+        */
+        shoppingCart.title = "Shopping Cart"
     }
 
     /*

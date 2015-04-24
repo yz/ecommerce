@@ -51,6 +51,8 @@
 		9C92B3041AE091E70044E610 /* CustomPFLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92B3031AE091E70044E610 /* CustomPFLogInViewController.m */; };
 		9C970E261AE84CE300554D17 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C970E241AE84CE300554D17 /* LoginSignUpViewController.swift */; };
 		9C970E271AE84CE300554D17 /* LoginSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C970E251AE84CE300554D17 /* LoginSignUpViewController.xib */; };
+		9C970E291AE9C52600554D17 /* ShoppingCart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C970E281AE9C52600554D17 /* ShoppingCart.xib */; };
+		9C970E2B1AE9C61200554D17 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C970E2A1AE9C61200554D17 /* ShoppingCartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		9C92B3031AE091E70044E610 /* CustomPFLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPFLogInViewController.m; sourceTree = "<group>"; };
 		9C970E241AE84CE300554D17 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		9C970E251AE84CE300554D17 /* LoginSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSignUpViewController.xib; sourceTree = "<group>"; };
+		9C970E281AE9C52600554D17 /* ShoppingCart.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCart.xib; sourceTree = "<group>"; };
+		9C970E2A1AE9C61200554D17 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 				9C8CFE101AD82CA900E322E7 /* DummyViewController.swift */,
 				9C8CFE111AD82CA900E322E7 /* CategoryViewCell.swift */,
 				9C8CFE121AD82CA900E322E7 /* CategoryCollectionView.xib */,
+				9C970E281AE9C52600554D17 /* ShoppingCart.xib */,
+				9C970E2A1AE9C61200554D17 /* ShoppingCartViewController.swift */,
 				9C8CFE131AD82CA900E322E7 /* CategoryCollectionView.swift */,
 				9C8CFE141AD82CA900E322E7 /* CategoryPrototypeCell.xib */,
 				9C8CFE151AD82CA900E322E7 /* CategoryPrototypeCell.swift */,
@@ -341,6 +347,7 @@
 				9C8CFDF01AD82C2B00E322E7 /* LaunchScreen.xib in Resources */,
 				9C8CFE221AD82CA900E322E7 /* ProductDetailView.xib in Resources */,
 				9C8CFDED1AD82C2B00E322E7 /* Images.xcassets in Resources */,
+				9C970E291AE9C52600554D17 /* ShoppingCart.xib in Resources */,
 				9C8CFE231AD82CA900E322E7 /* ProductDetail.xib in Resources */,
 				9C8CFE281AD82CA900E322E7 /* CategoryPrototypeCell.xib in Resources */,
 				9C970E271AE84CE300554D17 /* LoginSignUpViewController.xib in Resources */,
@@ -376,6 +383,7 @@
 				9C8CFE1C1AD82CA900E322E7 /* Regex.swift in Sources */,
 				9C8CFE2A1AD82CA900E322E7 /* SecondViewController.swift in Sources */,
 				9C8CFE251AD82CA900E322E7 /* CategoryViewCell.swift in Sources */,
+				9C970E2B1AE9C61200554D17 /* ShoppingCartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

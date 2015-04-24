@@ -32,7 +32,6 @@ class CategoryCollectionView: UICollectionViewController{
     
     func isLastLevel( productList : PFQuery) -> Bool
     {
-        var obj = productList.getFirstObject()
         
         if( productList.countObjects()==0)
         {
@@ -182,8 +181,8 @@ class CategoryCollectionView: UICollectionViewController{
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        var title = categoryList[indexPath.item][0] as String
-        title = title.replace(".*\\.", template: "")
+        var path = categoryList[indexPath.item][0] as String
+        var title = path.replace(".*\\.", template: "")
         
         var productList:PFQuery = PFQuery(className: "Product");
         //var matchPattern = ".*\(categoryName).*"

@@ -18,6 +18,8 @@ class ProductDetailViewController: UIViewController {
     
     @IBOutlet var productTitle: UILabel!
     
+    var hierarchy : String = ""
+    
     @IBAction func addToCart(sender: AnyObject) {
         
         if(PFUser.currentUser()==nil)
@@ -32,11 +34,45 @@ class ProductDetailViewController: UIViewController {
         else
         {
             println("You are \(PFUser.currentUser().username)")
+            
         }
     }
-    var object : PFObject!
     
-   
+    
+    func addItemToCart(usr:Int, path:String)->(){
+        var hrchy = path
+        path.replace(".*\\.", template: "")
+        var row:PFObject! = nil
+        var productList:PFQuery = PFQuery(className: "Product");
+        var custList:PFQuery = PFQuery(className: "Customer");
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        
+        
+        var matchPattern = "\(hrchy)"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        custList = custList.whereKey("customerId", equalTo: usr)
+        
+        if(productList.countObjects() != 0 && custList.countObjects() == 1){//Objects exists
+            
+            var customer:PFObject = custList.getFirstObject() as PFObject
+            cartList = cartList.whereKey("Customer", equalTo: customer)
+            var cart:PFObject = cartList.getFirstObject() as PFObject
+            11
+            var currCart:PFRelation = cart.relationForKey("Product")
+            
+            for obj in productList.findObjects(){
+                row = obj as PFObject
+                if row["productType"] as Int == 1{//Valid item selected, add to cart
+                    currCart.addObject(row)
+                }
+            }
+            
+            cart.saveEventually(nil)
+            //cart.saveInBackgroundWithBlock(nil)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +85,11 @@ class ProductDetailViewController: UIViewController {
         var matchPattern = ".*\(self.title!)"
         
         reqObject = reqObject.whereKey("Hierarchy", matchesRegex: matchPattern)
+        var obj = reqObject.getFirstObject()
+        var imageLink = obj["itemImage"] as String
+        hierarchy = obj?["Hierarchy"] as String
         
-        var imageLink = reqObject.getFirstObject()["itemImage"] as String
-        
+        println("-----------> " + hierarchy)
         productImage.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
         productTitle.text = self.title!
         
