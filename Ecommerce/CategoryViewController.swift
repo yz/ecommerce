@@ -36,13 +36,13 @@ class CategoryViewController: UICollectionViewController {
    
     //REMOVE CODE ! -- ONLY FOR TESTING PURPOSE!
     func init_cart()->(){
-        var custList:PFQuery = PFQuery(className: "Customer");
+        var custList:PFQuery = PFQuery(className: "_User");
         custList = custList.whereKey("customerId", equalTo: 123456789)
         var customer:PFObject = custList.getFirstObject() as PFObject
         var cartList:PFQuery = PFQuery(className: "Cart");
         var cart:PFObject = cartList.findObjects()[0] as PFObject
-        //cart["Customer"] = customer
-        var pfrCartCustomer:PFRelation = cart.relationForKey("Customer")
+        //cart["_User"] = customer
+        var pfrCartCustomer:PFRelation = cart.relationForKey("_User")
         pfrCartCustomer.addObject(customer)
         cart.saveEventually(nil)
         //cart.saveInBackgroundWithBlock(nil)
@@ -53,7 +53,7 @@ class CategoryViewController: UICollectionViewController {
         path.replace(".*\\.", template: "")
         var row:PFObject! = nil
         var productList:PFQuery = PFQuery(className: "Product");
-        var custList:PFQuery = PFQuery(className: "Customer");
+        var custList:PFQuery = PFQuery(className: "_User");
         var cartList:PFQuery = PFQuery(className: "Cart");
         
         
@@ -64,7 +64,7 @@ class CategoryViewController: UICollectionViewController {
         if(productList.countObjects() != 0 && custList.countObjects() == 1){//Objects exists
             
             var customer:PFObject = custList.getFirstObject() as PFObject
-            cartList = cartList.whereKey("Customer", equalTo: customer)
+            cartList = cartList.whereKey("_User", equalTo: customer)
             var cart:PFObject = cartList.getFirstObject() as PFObject
             11
             var currCart:PFRelation = cart.relationForKey("Product")

@@ -27,21 +27,12 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
     }
     
     @IBAction func btnDeleteAccount(sender: AnyObject) {
-        if let currentUser = PFUser.currentUser()
-        {
-            currentUser.fetch()
-            var users:PFQuery = PFQuery(className: "_User");
-            users = users.whereKey("email" , matchesRegex: currentUser["email"] as String)
-            
-            if(users.countObjects() != 0 && currentUser.isAuthenticated()){//Object exists
-                for usr in users.findObjects(){
-                    usr.deleteInBackgroundWithBlock(nil)
-                }
-            }
-            
+        PFUser.currentUser().deleteInBackgroundWithBlock { (bDeletedSuccessfully:Bool, e:NSError!) -> Void in
             PFUser.logOut()
+            if bDeletedSuccessfully{
+                self.loginNewOrLogout()
+            }
         }
-        loginNewOrLogout()
     }
     
     
@@ -55,12 +46,12 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
             loginViewController.logInView.passwordField.text = ""
             self.presentViewController(loginViewController, animated: true, completion: nil)
         }else{
-            if let verified = PFUser.currentUser().objectForKey("emailVerified") as? Bool{
-                if verified{
-                    btnLogoutObj.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
-                    btnDeleteUsr.setTitle("Delete \(PFUser.currentUser().username)", forState: nil)
-                    return
-                }
+            //if let verified = PFUser.currentUser().objectForKey("emailVerified") as? Bool{
+            if true{
+                btnLogoutObj.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
+                btnDeleteUsr.setTitle("Delete \(PFUser.currentUser().username)", forState: nil)
+                return
+                
             }
             
             PFUser.logOut()
@@ -126,8 +117,11 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         if PFUser.currentUser()==nil
         {
             PFUser.logOut()
+        }else{
+            println("Initializing cart for user---------")
+            init_cart(PFUser.currentUser())
         }
-        signUpController.dismissViewControllerAnimated( true, completion: nil)
+        signUpController.dismissViewControllerAnimated( false, completion: nil)
         loginNewOrLogout()
     }
     
@@ -135,6 +129,20 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         
     }
     
+    func init_cart(forcustomer:PFUser)->(){
+        forcustomer.fetch()
+        var custList:PFQuery = PFQuery(className: "_User");
+        custList = custList.whereKey("email", equalTo: forcustomer["email"] as String)
+        var customer:PFObject = custList.getFirstObject() as PFObject
+        
+        //Add a new cart for first time user
+        var row:PFObject = PFObject(className:"Cart")
+        row.ACL = PFACL(user: forcustomer) // Set ACL
+        var pfrCartCustomer:PFRelation = row.relationForKey("customer")
+        pfrCartCustomer.addObject(customer)
+        
+        row.saveInBackgroundWithBlock(nil)
+    }
     
 }
 
