@@ -46,6 +46,10 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
     
     
     func loginNewOrLogout(){
+        /*var stvc: STPCheckoutViewController = STPCheckoutViewController()
+        self.presentViewController(stvc, animated: true, completion: nil)
+        */
+        
         if PFUser.currentUser()==nil
         {
             loginViewController.logInView.passwordField.text = ""
@@ -63,6 +67,7 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
             var alert = UIAlertView(title: "First-time Login", message: "Please verify your e-mail before logging in", delegate: self, cancelButtonTitle: "Ok")
             alert.show()
         }
+
     }
     
     override func viewDidLoad() {

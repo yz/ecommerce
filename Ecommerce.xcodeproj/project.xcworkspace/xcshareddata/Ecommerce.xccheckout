@@ -12,6 +12,8 @@
 	<dict>
 		<key>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</key>
 		<string>https://github.com/yz/ecommerce.git</string>
+		<key>A5C151FC3F18980DA2906AAA3DE9140767EF2310</key>
+		<string>https://github.com/stripe/stripe-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Ecommerce.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</key>
 		<string>../..</string>
+		<key>A5C151FC3F18980DA2906AAA3DE9140767EF2310</key>
+		<string>../../stripe-ios</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/yz/ecommerce.git</string>
@@ -35,6 +39,14 @@
 			<string>9CD61F4F0FB8C0F1B4CCCE8FBEF53C4FC3E7EC1B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ecommerce</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A5C151FC3F18980DA2906AAA3DE9140767EF2310</string>
+			<key>IDESourceControlWCCName</key>
+			<string>stripe-ios</string>
 		</dict>
 	</array>
 </dict>

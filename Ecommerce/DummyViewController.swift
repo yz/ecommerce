@@ -28,7 +28,7 @@ class DummyViewController: UIViewController {
         println("Inside ....")
         
         
-        let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Product")
+        let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Cart")
         self.navigationController?.pushViewController(shoppingCart, animated: false)
         
         /*

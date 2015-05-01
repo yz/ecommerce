@@ -42,7 +42,10 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
     // MARK: Data
     
     override func queryForCollection() -> PFQuery {
+
+        
         return super.queryForCollection()
+        
     }
     
     // MARK: CollectionView
@@ -51,6 +54,24 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
         
         cell?.textLabel.textAlignment = .Center
+        println(object?)
+        
+        /*
+        var customer : PFRelation = object?["Customer"] as PFRelation
+        var product : PFRelation = object?["Product"] as PFRelation
+        
+        var customerQuery = customer.query()
+        var productQuery = product.query()
+        
+        var prodObj = productQuery.getFirstObject()
+        
+        println(product)
+        
+        */
+        
+        
+        //   Eg. To display items from the product table
+        /*
         var productTitle = object?["Hierarchy"] as String
         productTitle = productTitle.replace(".*\\.", template: "")
         
@@ -61,6 +82,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         cell?.contentView.layer.borderWidth = 1.0
         cell?.contentView.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell?.imageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
+        */
+        
         
         return cell
     }
