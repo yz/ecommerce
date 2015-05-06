@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailViewController" customModule="Ecommerce" customModuleProvider="target">
             <connections>
+                <outlet property="addToCart" destination="PUN-Im-kRQ" id="abd-Dx-TKs"/>
                 <outlet property="productImage" destination="r4R-KN-swC" id="JHV-ZB-KGf"/>
                 <outlet property="productTitle" destination="OUL-IK-YOh" id="n2b-Hf-Opg"/>
                 <outlet property="view" destination="iN0-l3-epB" id="zb3-dY-xcq"/>
@@ -20,7 +21,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUL-IK-YOh">
                     <rect key="frame" x="79" y="383" width="485" height="85"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r4R-KN-swC">
@@ -31,13 +32,19 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUN-Im-kRQ">
-                    <rect key="frame" x="79" y="519" width="173" height="30"/>
+                    <rect key="frame" x="79" y="464" width="173" height="30"/>
                     <state key="normal" title="Add to cart">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="addToCart:" destination="-1" eventType="touchUpInside" id="fj5-1p-t1J"/>
                     </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKC-va-QLm">
+                    <rect key="frame" x="127" y="515" width="66" height="30"/>
+                    <state key="normal" title="Checkout">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

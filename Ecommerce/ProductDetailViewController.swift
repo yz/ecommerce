@@ -15,6 +15,7 @@ class ProductDetailViewController: UIViewController {
     
     @IBOutlet var productImage: UIImageView!
     
+    @IBOutlet var addToCart: UIButton!
     
     @IBOutlet var productTitle: UILabel!
     
@@ -37,6 +38,10 @@ class ProductDetailViewController: UIViewController {
             currentUser.fetch()
             println("You are \(currentUser.username)")
             addItemToCart(currentUser["email"] as String, path: hierarchy)
+            addToCart.setTitle("Added to Cart", forState: UIControlState.Normal)
+            addToCart.enabled = false
+            
+            
         }
     }
     
