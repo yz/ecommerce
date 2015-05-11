@@ -36,6 +36,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             println("Ok")
             
         let paymentView : PaymentViewController = PaymentViewController(nibName:"PaymentViewController",bundle:nil)
+        paymentView.price = 24 //REMOVE THIS! ADD ACTUAL COST HERE
         self.navigationController?.pushViewController(paymentView, animated: true)
             
             
@@ -44,9 +45,6 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             println("Cancel")
         }))
         self.presentViewController(alert, animated: true, completion: nil)
-       
-        
-        
     }
     // MARK: UIViewController
     
