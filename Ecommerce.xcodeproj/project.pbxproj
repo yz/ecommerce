@@ -94,6 +94,7 @@
 		61DF93AC1AFCFDBD000E8BDA /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DF93A61AFCFDBD000E8BDA /* ParseUI.framework */; };
 		61DF93AE1AFCFDF7000E8BDA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DF93AD1AFCFDF7000E8BDA /* Default-568h@2x.png */; };
 		61F080251AE164FD006D3480 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F080241AE164FD006D3480 /* Accounts.framework */; };
+		61F3FEBC1B0259CF00FA8A1C /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F3FEBB1B0259CF00FA8A1C /* util.swift */; };
 		9C1A49C01AF6510200CDDE5C /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1A49BE1AF6510200CDDE5C /* PaymentViewController.swift */; };
 		9C1A49C11AF6510200CDDE5C /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1A49BF1AF6510200CDDE5C /* PaymentViewController.xib */; };
 		9C6C3A611AF2E1C3005A0322 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6C3A601AF2E1C3005A0322 /* Foundation.framework */; };
@@ -255,6 +256,7 @@
 		61DF93A61AFCFDBD000E8BDA /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "parse-library/ParseUI.framework"; sourceTree = "<group>"; };
 		61DF93AD1AFCFDF7000E8BDA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		61F080241AE164FD006D3480 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		61F3FEBB1B0259CF00FA8A1C /* util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
 		9C1A49BE1AF6510200CDDE5C /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		9C1A49BF1AF6510200CDDE5C /* PaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
 		9C6C3A601AF2E1C3005A0322 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -563,6 +565,7 @@
 				9C8CFDE11AD82C2B00E322E7 /* Supporting Files */,
 				9C8CFE051AD82CA800E322E7 /* Ecommerce-Bridging-Header.h */,
 				9C92B3031AE091E70044E610 /* CustomPFLogInViewController.m */,
+				61F3FEBB1B0259CF00FA8A1C /* util.swift */,
 			);
 			path = Ecommerce;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				9C8CFE291AD82CA900E322E7 /* CategoryPrototypeCell.swift in Sources */,
 				61543DC11AFD03EA0065409D /* STPIOSCheckoutWebViewAdapter.m in Sources */,
 				61543DC71AFD03EA0065409D /* STPBankAccount.m in Sources */,
+				61F3FEBC1B0259CF00FA8A1C /* util.swift in Sources */,
 				9C8CFE2B1AD82CA900E322E7 /* TableViewController.swift in Sources */,
 				9C92B3041AE091E70044E610 /* CustomPFLogInViewController.m in Sources */,
 				9C1A49C01AF6510200CDDE5C /* PaymentViewController.swift in Sources */,
