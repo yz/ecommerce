@@ -12,6 +12,8 @@ import ParseUI
 
 class ShoppingCartViewController: PFQueryCollectionViewController {
     
+    var cartCount:Int = 0
+    
     convenience init(className: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
@@ -25,7 +27,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         super.collectionView?.allowsMultipleSelection = true
         super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
     }
-    
+   
     func checkOut()
     {
         println("Code for checkout with items in the shopping cart")
@@ -49,6 +51,11 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         
     }
     // MARK: UIViewController
+    
+    override func viewWillAppear(animated: Bool) {
+        // navigationItem.title = &quot;One&quot;
+        navigationItem.title = "Items in the Cart : \(cartCount)"
+    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -80,6 +87,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             cartList = cartList.whereKey("customer", equalTo: customer)
             var cart:PFObject = cartList.getFirstObject() as PFObject
             var currCart:PFRelation = cart.relationForKey("Product")
+            println("No of objects in the cart are \(currCart.query().countObjects())");
+            cartCount = currCart.query().countObjects()
             return currCart.query()
         }
     }
