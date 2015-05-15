@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -137,67 +137,76 @@
         <scene sceneID="HAz-uP-jNL">
             <objects>
                 <collectionViewController storyboardIdentifier="CategoryViewController" id="eMO-dU-MnO" customClass="CategoryCollectionView" customModule="Ecommerce" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ToG-1t-4cP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mri-3Z-Wj2">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCell" id="cVz-qz-5Yh" customClass="CategoryViewCell" customModule="Ecommerce" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9OI-R9-Glv">
-                                            <rect key="frame" x="32" y="15" width="80" height="80"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PEn-n7-I1y">
-                                            <rect key="frame" x="8" y="103" width="134" height="39"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="PEn-n7-I1y" firstAttribute="leading" secondItem="cVz-qz-5Yh" secondAttribute="leadingMargin" id="LSw-yx-IEu"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="PEn-n7-I1y" secondAttribute="bottom" constant="10" id="WE4-HE-laO"/>
-                                    <constraint firstItem="9OI-R9-Glv" firstAttribute="top" secondItem="cVz-qz-5Yh" secondAttribute="topMargin" constant="7" id="Y3Q-9A-ux8"/>
-                                    <constraint firstItem="9OI-R9-Glv" firstAttribute="leading" secondItem="cVz-qz-5Yh" secondAttribute="leadingMargin" constant="24" id="ZpB-qq-ryr"/>
-                                    <constraint firstItem="PEn-n7-I1y" firstAttribute="top" secondItem="9OI-R9-Glv" secondAttribute="bottom" constant="16" id="nZJ-Zs-sMG"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="9OI-R9-Glv" secondAttribute="trailing" constant="30" id="qAY-ij-M7N"/>
-                                    <constraint firstItem="PEn-n7-I1y" firstAttribute="trailing" secondItem="cVz-qz-5Yh" secondAttribute="trailingMargin" id="tsP-ka-jB4"/>
-                                </constraints>
-                                <size key="customSize" width="150" height="150"/>
-                                <connections>
-                                    <outlet property="categoryImage" destination="9OI-R9-Glv" id="XRt-2z-Hc2"/>
-                                    <outlet property="categoryNameLabel" destination="PEn-n7-I1y" id="ENe-ZI-VqR"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="eMO-dU-MnO" id="qsD-kH-Z0E"/>
-                            <outlet property="delegate" destination="eMO-dU-MnO" id="TOE-3Y-wLU"/>
-                            <outletCollection property="gestureRecognizers" destination="Htp-Zo-Hv8" appends="YES" id="jcG-GB-UCK"/>
-                        </connections>
-                    </collectionView>
                     <navigationItem key="navigationItem" title="Title" id="ALv-fX-3Br"/>
                     <connections>
                         <outlet property="collectionView" destination="ToG-1t-4cP" id="YTG-sk-4Nv"/>
+                        <outlet property="searchDisplayController" destination="JXN-li-chz" id="vTi-f4-VTG"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugR-je-gbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ToG-1t-4cP">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mri-3Z-Wj2">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells>
+                        <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCell" id="cVz-qz-5Yh" customClass="CategoryViewCell" customModule="Ecommerce" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9OI-R9-Glv">
+                                        <rect key="frame" x="32" y="15" width="80" height="80"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PEn-n7-I1y">
+                                        <rect key="frame" x="8" y="103" width="134" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="PEn-n7-I1y" firstAttribute="leading" secondItem="cVz-qz-5Yh" secondAttribute="leadingMargin" id="LSw-yx-IEu"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="PEn-n7-I1y" secondAttribute="bottom" constant="10" id="WE4-HE-laO"/>
+                                <constraint firstItem="9OI-R9-Glv" firstAttribute="top" secondItem="cVz-qz-5Yh" secondAttribute="topMargin" constant="7" id="Y3Q-9A-ux8"/>
+                                <constraint firstItem="9OI-R9-Glv" firstAttribute="leading" secondItem="cVz-qz-5Yh" secondAttribute="leadingMargin" constant="24" id="ZpB-qq-ryr"/>
+                                <constraint firstItem="PEn-n7-I1y" firstAttribute="top" secondItem="9OI-R9-Glv" secondAttribute="bottom" constant="16" id="nZJ-Zs-sMG"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="9OI-R9-Glv" secondAttribute="trailing" constant="30" id="qAY-ij-M7N"/>
+                                <constraint firstItem="PEn-n7-I1y" firstAttribute="trailing" secondItem="cVz-qz-5Yh" secondAttribute="trailingMargin" id="tsP-ka-jB4"/>
+                            </constraints>
+                            <size key="customSize" width="150" height="150"/>
+                            <connections>
+                                <outlet property="categoryImage" destination="9OI-R9-Glv" id="XRt-2z-Hc2"/>
+                                <outlet property="categoryNameLabel" destination="PEn-n7-I1y" id="ENe-ZI-VqR"/>
+                            </connections>
+                        </collectionViewCell>
+                    </cells>
+                    <connections>
+                        <outlet property="dataSource" destination="eMO-dU-MnO" id="qsD-kH-Z0E"/>
+                        <outlet property="delegate" destination="eMO-dU-MnO" id="TOE-3Y-wLU"/>
+                        <outletCollection property="gestureRecognizers" destination="Htp-Zo-Hv8" appends="YES" id="jcG-GB-UCK"/>
+                    </connections>
+                </collectionView>
                 <swipeGestureRecognizer direction="right" id="Htp-Zo-Hv8"/>
+                <searchDisplayController id="JXN-li-chz">
+                    <connections>
+                        <outlet property="delegate" destination="eMO-dU-MnO" id="6W2-Gl-zFc"/>
+                        <outlet property="searchContentsController" destination="eMO-dU-MnO" id="eIP-uc-BYp"/>
+                        <outlet property="searchResultsDataSource" destination="eMO-dU-MnO" id="iOt-5M-1TE"/>
+                        <outlet property="searchResultsDelegate" destination="eMO-dU-MnO" id="BXo-eI-KQB"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="742" y="-1311"/>
         </scene>

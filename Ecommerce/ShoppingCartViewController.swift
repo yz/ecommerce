@@ -18,8 +18,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
         layout.minimumInteritemSpacing = 5.0
-        self.init(collectionViewLayout: layout,className : className)   // Change to className parameter after Sarath fixes Cart data model !
-        
+        self.init(collectionViewLayout: layout,className : className)
         title = "Shopping Cart"
         pullToRefreshEnabled = true
         paginationEnabled = false
@@ -38,6 +37,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             println("Ok")
             
         let paymentView : PaymentViewController = PaymentViewController(nibName:"PaymentViewController",bundle:nil)
+        paymentView.price = 24 //REMOVE THIS! ADD ACTUAL COST HERE
+            
         self.navigationController?.pushViewController(paymentView, animated: true)
             
             
@@ -46,9 +47,6 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             println("Cancel")
         }))
         self.presentViewController(alert, animated: true, completion: nil)
-       
-        
-        
     }
     // MARK: UIViewController
     
@@ -75,7 +73,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         {
             //return PFQuery() // IS BE A PROBLEM
             var qry = super.queryForCollection()
-            return qry.whereKey("INVISIBLE_KEY", equalTo: "INVISIBLE_VALUE") //BAD CODE !
+            return qry.whereKey("NON_EXISTANT_KEY", equalTo: "NON_EXISTANT_VALUE") //RETURN A QUERY THAT IS GAURANTEED TO RETURN NOTHING. BAD CODE !
         }
         else{
             var custList:PFQuery = PFQuery(className: "_User");

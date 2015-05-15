@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class ProductDetailViewController: UIViewController {
-
+    
     
     
     @IBOutlet var productImage: UIImageView!
@@ -39,9 +39,7 @@ class ProductDetailViewController: UIViewController {
             println("You are \(currentUser.username)")
             addItemToCart(currentUser["email"] as String, path: hierarchy)
             addToCart.setTitle("Added to Cart", forState: UIControlState.Normal)
-            addToCart.enabled = false
-            
-            
+            //addToCart.enabled = false //Add multiple supported now.
         }
     }
     
@@ -72,9 +70,7 @@ class ProductDetailViewController: UIViewController {
                     currCart.addObject(row)
                 }
             }
-            
             cart.saveEventually(nil)
-            //cart.saveInBackgroundWithBlock(nil)
         }
     }
     
@@ -85,8 +81,8 @@ class ProductDetailViewController: UIViewController {
         println(productTitle.text?)
         
         
-    Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
-       
+        Parse.setApplicationId("T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL", clientKey: "n1Ko6El8LjehGEzZFSjDYFoCNSVt8tCMsJG0ftp5")
+        
         var reqObject:PFQuery = PFQuery(className: "Product");
         var matchPattern = ".*\(self.title!)"
         
@@ -98,28 +94,22 @@ class ProductDetailViewController: UIViewController {
         println("-----------> " + hierarchy)
         productImage.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
         productTitle.text = self.title!
-        
-
-        
-        
-        
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

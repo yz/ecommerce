@@ -9,16 +9,6 @@
 import UIKit
 import Parse
 
-struct Stack<T> {
-    var items = [T]()
-    mutating func push(item: T) {
-        items.append(item)
-    }
-    mutating func pop() -> T {
-        return items.removeLast()
-    }
-}
-
 // CONSTANTS
 let reuseIdentifier = "CategoryCell"
 let folderImgURL = "http://icons.iconarchive.com/icons/kyo-tux/aeon/256/Folder-Blue-Folder-icon.png"

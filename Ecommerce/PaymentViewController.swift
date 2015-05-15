@@ -7,19 +7,25 @@
 //
 
 import UIKit
+import Parse
 
 class PaymentViewController: UIViewController,PTKViewDelegate{
 
     var payBtn : UIBarButtonItem?
     var paymentView : PTKView?
+    var price: Float64 = 0.0
     
+    func PaymentViewController(price:Float64){
+        self.price = price
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Stripe.setDefaultPublishableKey("pk_live_M8nQYLZJPzkC5ti2D3vasBZs")
+        //Stripe.setDefaultPublishableKey("pk_live_M8nQYLZJPzkC5ti2D3vasBZs")
+        Stripe.setDefaultPublishableKey("pk_test_gc5Hmze7imzY3TifemNrXuF8") //Mine(Sarath)
         
-        paymentView = PTKView(frame: CGRectMake(15, 20, 290, 55))
+        paymentView = PTKView(frame: CGRectMake(0, 20, 290, 55))
         paymentView?.center = view.center
         paymentView?.delegate = self
         view.addSubview(paymentView!)
@@ -50,12 +56,18 @@ class PaymentViewController: UIViewController,PTKViewDelegate{
                 println(error)
             } else {
                 println(token)
+                self.handleToken(token)
             }
         })
     }
     
     func handleToken(token: STPToken!) {
         //send token to backend and create charge
+        //var result: Bool = PFCloud.callFunction("chargeCard", withParameters: ["price": self.price, "cardToken": "INVALID_TOKEN_ID"]) as Bool//FOR FAILURE ONLY! REMOVE IT.
+        var result: Bool = PFCloud.callFunction("chargeCard", withParameters: ["price": self.price, "cardToken": token.tokenId]) as Bool
+        println("Charging is successful = \(result)")
+        var alert = UIAlertView(title: "Payment Information", message: result ? "Success!" : "Sorry, the payment failed. Please try again.", delegate: self, cancelButtonTitle: "Ok")
+        alert.show()
     }
     
     override func didReceiveMemoryWarning() {

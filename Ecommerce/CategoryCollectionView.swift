@@ -9,6 +9,19 @@
 import UIKit
 import Parse
 
+class SearchBarCollectionReusableView: UICollectionReusableView {
+    
+    @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var filterSegCtrl:UISegmentedControl!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
 
 class CategoryCollectionView: UICollectionViewController{
     
@@ -81,6 +94,26 @@ class CategoryCollectionView: UICollectionViewController{
         //return getSubCategories(productList, categoryName : categoryName) // From the retrieved set of products gets the sub category list
     }
 
+    func search(searchStr: String, restrictToProducts: Bool = true, searchSpace:[String] = ["Hierarchy", "itemTags", "manufacturer", "productDescription", "productName"]) ->[[String]]{
+        var res:[[String]] = []
+        
+        var matchPattern = searchStr.replace("\\*", template: ".*?").replace("\\s*", template: "")
+        
+        for searchColumn in searchSpace{
+            var productList:PFQuery = PFQuery(className: "Product");
+            if restrictToProducts{
+                productList = productList.whereKey("productType", equalTo: 1)  // retrieves only the set of products
+            }
+            productList = productList.whereKey(searchColumn, matchesRegex: matchPattern)  // retrieves the set of products that matched the input
+            for item in getSubCategoriesObjectIDs(productList){
+                if !contains(res, {$0[0] == item[0]}){ //Add only unique products
+                    res.append(item)
+                }
+            }
+        }
+        
+        return res
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +144,9 @@ class CategoryCollectionView: UICollectionViewController{
             categoryList = retrieveListing(currentCategory)
         }
         
-        
+        // TEST SEARCH. REMOVE IT!
+        let res = search("*r*")
+        println("Search found the following - \(res)")
 
         // Do any additional setup after loading the view.
     }
@@ -149,6 +184,17 @@ class CategoryCollectionView: UICollectionViewController{
         return CGSizeMake(182,182)
     }
 
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String!, atIndexPath indexPath: NSIndexPath!) -> UICollectionReusableView {
+        
+        var reusableview:UICollectionReusableView!
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView:SearchBarCollectionReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "SearchBar", forIndexPath: indexPath) as SearchBarCollectionReusableView
+            reusableview = headerView
+        }
+        println("The kind is \(kind)")
+        return reusableview
+    }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -161,11 +207,7 @@ class CategoryCollectionView: UICollectionViewController{
         
         cell.categoryTitle.text = "\(itemStr)"
         cell.categoryImage.image=UIImage(data: NSData(contentsOfURL: NSURL(string: (categoryList[indexPath.item][1]) as String)!)!)
-
-        
         return cell
-
-        
     }
     
     // MARK: UICollectionViewDelegate

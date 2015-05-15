@@ -73,9 +73,24 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
          self.loginViewController.logInView.logo = newLogoLogin
         let newLogoSignup  = UILabel()
         newLogoSignup.text = "MobileWare"
+        
         self.signupViewController.signUpView.logo = newLogoSignup
         //loginNewOrLogout()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //TEST ONLY !! REMOVE IT !
+        /*
+        var resp:String = PFCloud.callFunction("hello", withParameters: nil) as String
+        println("[RESP] : "+resp)
+        var q = PFQuery()
+        var resp2 = PFCloud.callFunction("getUser", withParameters: ["email": "sb@c.com"]) as [PFUser]
+        for u in resp2{
+            u.fetch()
+            println(u["username"])
+        }
+        
+        var resp3 = PFCloud.callFunction("chargeCard", withParameters: ["price": 24, "cardToken": 0])
+        println(resp3)*/
     }
     
     override func viewDidAppear(animated: Bool) {

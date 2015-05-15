@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "E-Commerce": {
+      "applicationId": "T5COsNbanlLkzcafpo6CkyeXlRNNvkL5RqQv8isL",
+      "masterKey": "4MOGq04AbhOZ1T1Gbq6K2D6GIzKEXiY6LtBYUwfb"
+    },
+    "_default": {
+      "link": "E-Commerce"
+    }
+  }
+}
