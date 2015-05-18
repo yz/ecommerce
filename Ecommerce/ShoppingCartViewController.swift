@@ -76,10 +76,46 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             custList = custList.whereKey("email", equalTo: forCustomer["email"] as String)
             var customer:PFObject = custList.getFirstObject() as PFObject
             cartList = cartList.whereKey("customer", equalTo: customer)
+            if let iscartthere = cartList.getFirstObject(){
+                //Do nothing.
+            }else{
+                //Initialize cart if missing
+                SecondViewController.init_cart(PFUser.currentUser())
+            }
             var cart:PFObject = cartList.getFirstObject() as PFObject
             var currCart:PFRelation = cart.relationForKey("Product")
             return currCart.query()
         }
+    }
+    
+    func getCount(var hierarchy:String)->(Int){
+        var custList:PFQuery = PFQuery(className: "_User");
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        var forCustomer:PFUser = PFUser.currentUser()
+        forCustomer.fetch()
+        custList = custList.whereKey("email", equalTo: forCustomer["email"] as String)
+        var customer:PFObject = custList.getFirstObject() as PFObject
+        cartList = cartList.whereKey("customer", equalTo: customer)
+        if let iscartthere = cartList.getFirstObject(){
+            //Do nothing.
+        }else{
+            //Initialize cart if missing
+            SecondViewController.init_cart(PFUser.currentUser())
+        }
+        var cart:PFObject = cartList.getFirstObject() as PFObject
+        
+        let cnt:String = cart["count"] as String
+        for keyval in cnt.componentsSeparatedByString("%"){
+            if !keyval.isEmpty{
+                let kv:[String] = keyval.componentsSeparatedByString("=")
+                var k = kv[0]
+                var v = kv[1]
+                if k == hierarchy{
+                    return v.toInt()!
+                }
+            }
+        }
+        return 0
     }
     
     // MARK: CollectionView
@@ -99,7 +135,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         var imageLink = object?["itemImage"] as String
         
         println(imageLink)
-        cell?.textLabel.text = productTitle
+        cell?.textLabel.text = productTitle + "( " + String(getCount(String(object?["Hierarchy"] as NSString))) + " )"
         cell?.contentView.layer.borderWidth = 1.0
         cell?.contentView.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell?.imageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
