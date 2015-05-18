@@ -27,15 +27,18 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
     
     func checkOut()
     {
-        println("Code for checkout with items in the shopping cart")
+         println("Code for checkout with items in the shopping cart")
+        let paymentView : PaymentViewController = PaymentViewController(nibName:"PaymentViewController",bundle:nil)
+        paymentView.price = 0
+        for product in queryForCollection().findObjects(){
+            var numItems = Float64(getCount(product["Hierarchy"] as String))
+            paymentView.price += numItems * (product["unitPrice"] as Float64)
+        }
         
-        var alert = UIAlertController(title: "Total Cost", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
+        var alert = UIAlertController(title: "Total Cost", message: paymentView.price.description, preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
             println("Ok")
-            
-        let paymentView : PaymentViewController = PaymentViewController(nibName:"PaymentViewController",bundle:nil)
-        paymentView.price = 24 //REMOVE THIS! ADD ACTUAL COST HERE
             
         self.navigationController?.pushViewController(paymentView, animated: true)
             
@@ -86,6 +89,82 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             var currCart:PFRelation = cart.relationForKey("Product")
             return currCart.query()
         }
+    }
+    
+    func removeItemFromCart(usr:String, path:String)->(Bool){
+        var removed:Bool = false
+        var hrchy = path
+        path.replace(".*\\.", template: "")
+        var row:PFObject! = nil
+        var productList:PFQuery = PFQuery(className: "Product");
+        var custList:PFQuery = PFQuery(className: "_User");
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        
+        
+        var matchPattern = "\(hrchy)"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        custList = custList.whereKey("email", equalTo: usr)
+        
+        if(productList.countObjects() != 0 && custList.countObjects() == 1){//Objects exists
+            
+            var customer:PFObject = custList.getFirstObject() as PFObject
+            cartList = cartList.whereKey("customer", equalTo: customer)
+            if let iscartthere = cartList.getFirstObject(){
+                //Do nothing.
+            }else{
+                //Initialize cart if missing
+                SecondViewController.init_cart(PFUser.currentUser())
+                return false
+            }
+            var cart:PFObject = cartList.getFirstObject() as PFObject
+            var currCart:PFRelation = cart.relationForKey("Product")
+            
+            for obj in productList.findObjects(){
+                row = obj as PFObject
+                if row["productType"] as Int == 1{//Valid item selected, add to cart
+                    
+                    var cartQuery:PFQuery = currCart.query().whereKey("Hierarchy", equalTo: row["Hierarchy"] as NSString)
+                    var tmp = cartQuery.findObjects()
+                    
+                    row["count"] = row["count"] as Int + 1
+                    
+                    let cnt:String = cart["count"] as String
+                    var res:String = ""
+                    for keyval in cnt.componentsSeparatedByString("%"){
+                        if !keyval.isEmpty{
+                            let kv:[String] = keyval.componentsSeparatedByString("=")
+                            var k = kv[0]
+                            var v = kv[1]
+                            if k == row["Hierarchy"] as String{
+                                if v.toInt() > 0{
+                                    v = String(v.toInt()! - 1)
+                                }
+                                else{
+                                    currCart.removeObject(row) //No longer in cart. Remove relation
+                                    continue
+                                }
+                                
+                                removed = true
+                            }
+                            
+                            if res.isEmpty{
+                                res = k + "=" + v
+                            }else{
+                                res = res + "%" + k + "=" + v
+                            }
+                        }
+                    }
+                    
+                    cart["count"] = res
+                    
+                    row.saveInBackgroundWithBlock(nil)
+                    cart.save()
+                    println("Saved objects")
+                }
+            }
+        }
+        
+        return removed
     }
     
     func getCount(var hierarchy:String)->(Int){
