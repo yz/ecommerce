@@ -35,11 +35,13 @@ class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
     func getSubCategoriesObjectIDs( productList: PFQuery) -> [[String]]{
         var ret: [[String]] = []
         
-        for obj in productList.findObjects(){
-            var inLst:[String] = []
-            inLst.append(obj["Hierarchy"] as String)
-            inLst.append(obj["itemImage"] as String)
-            ret.append(inLst)
+        if let objectList = productList.findObjects(){
+            for obj in objectList{
+                var inLst:[String] = []
+                inLst.append(obj["Hierarchy"] as String)
+                inLst.append(obj["itemImage"] as String)
+                ret.append(inLst)
+            }
         }
         return ret
     }
@@ -98,14 +100,16 @@ class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
     func search(searchStr: String, restrictToProducts: Bool = true, searchSpace:[String] = ["Hierarchy", "itemTags", "manufacturer", "productDescription", "productName"]) ->[[String]]{
         var res:[[String]] = []
         
-        var matchPattern = searchStr.replace("\\*", template: ".*?").replace("\\s*", template: "")
+        var matchPattern = searchStr.replace("[^a-zA-Z0-9\\*]",template:"").replace("\\*", template: ".*?").replace("\\s*", template: "")
         
         for searchColumn in searchSpace{
             var productList:PFQuery = PFQuery(className: "Product");
+            
+            productList = productList.whereKey("Hierarchy", notEqualTo: "All") //Never show the root
             if restrictToProducts{
                 productList = productList.whereKey("productType", equalTo: 1)  // retrieves only the set of products
             }
-            productList = productList.whereKey(searchColumn, matchesRegex: matchPattern)  // retrieves the set of products that matched the input
+            productList = productList.whereKey(searchColumn, matchesRegex: currentCategory + ".*?" + matchPattern, modifiers:"i")  // retrieves the set of products that matched the input
             for item in getSubCategoriesObjectIDs(productList){
                 if !contains(res, {$0[0] == item[0]}){ //Add only unique products
                     res.append(item)
@@ -146,8 +150,8 @@ class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
         }
         
         // TEST SEARCH. REMOVE IT!
-        let res = search("*r*")
-        println("Search found the following - \(res)")
+        //let res = search("*r*")
+        //println("Search found the following - \(res)")
 
         // Do any additional setup after loading the view.
         
@@ -245,31 +249,35 @@ class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
         
         if(isLastLevel(productList))   // If its the last level load a different screen
         {
-                println("Just before transition to last level")
-                let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetailView",bundle:nil)
-                productDetailView.title = title
-                self.navigationController?.pushViewController(productDetailView, animated: true)
+            println("Just before transition to last level")
+            let productDetailView : ProductDetailViewController = ProductDetailViewController(nibName:"ProductDetailView",bundle:nil)
+            productDetailView.title = title
+            self.navigationController?.pushViewController(productDetailView, animated: true)
             
-
+            
             return true
         }
         
         
-            let nextCategoryLevel : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)
-            nextCategoryLevel.prodList = productList
-            nextCategoryLevel.title = title
-            nextCategoryLevel.currentCategory = title
-            nextCategoryLevel.categoryList = categoryList
+        let nextCategoryLevel : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)
+        nextCategoryLevel.prodList = productList
+        nextCategoryLevel.title = title
+        nextCategoryLevel.currentCategory = title
+        nextCategoryLevel.categoryList = categoryList
         self.navigationController?.pushViewController(nextCategoryLevel, animated: true)
         
-            return true
+        return true
         
     }
     
     // Search Bar Delegate methods
-
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        println("Searching")
+        println("Searching \(searchText)")
+        if searchText.isEmpty{
+            categoryList = retrieveListing(currentCategory)
+        }else{
+            categoryList = search(searchText, restrictToProducts:false)
+        }
         self.collectionView?.reloadData()
     }
     
