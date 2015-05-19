@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class ShoppingCartViewController: PFQueryCollectionViewController {
+class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecognizerDelegate{
     
     convenience init(className: String?) {
         let layout = UICollectionViewFlowLayout()
@@ -48,6 +48,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             println("Cancel")
         }))
         self.presentViewController(alert, animated: true, completion: nil)
+
+
     }
     // MARK: UIViewController
     
@@ -234,6 +236,48 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         
         return true
     }
+
+    func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+        if gestureRecognizer.state != UIGestureRecognizerState.Ended{
+            return
+        }
+        
+        let p = gestureRecognizer.locationInView(self.collectionView)
+        
+        let indexPath = self.collectionView?.indexPathForItemAtPoint(p)
+        
+        if let index = indexPath {
+            var cell = self.collectionView?.cellForItemAtIndexPath(index)
+            // do stuff with your cell, for example print the indexPath
+            println("Long pressed \(index.row)")
+        } else {
+            println("Could not find index path")
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.collectionView?.addGestureRecognizer(lpgr)
     
+    }
+    override func viewWillAppear(animated: Bool) {
+        // navigationItem.title = &quot;One&quot;
+        navigationItem.title = "Items in the Cart :"
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
+        layout.minimumInteritemSpacing = 5.0
+        pullToRefreshEnabled = true
+        paginationEnabled = false
+        super.collectionView?.allowsMultipleSelection = true
+        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
+        
+        
+    }
+
 
 }
