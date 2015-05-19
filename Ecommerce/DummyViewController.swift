@@ -10,10 +10,17 @@ import UIKit
 import Parse
 import ParseUI
 
-class DummyViewController: UIViewController {
+class DummyViewController: UIViewController,PTKViewDelegate {
 
+    var paymentView : PTKView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        paymentView = PTKView(frame: CGRectMake(0, 20, 290, 55))
+        paymentView?.center = view.center
+        paymentView?.delegate = self
+        view.addSubview(paymentView!)
+       
 
         // Do any additional setup after loading the view.
     }
@@ -30,6 +37,9 @@ class DummyViewController: UIViewController {
         
         let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Cart")   
         self.navigationController?.pushViewController(shoppingCart, animated: false)
+        
+        
+        self.addChildViewController(shoppingCart)
         
         /*
         let shoppingCart : CategoryCollectionView = CategoryCollectionView(nibName: "CategoryCollectionView", bundle: nil)

@@ -23,13 +23,15 @@ class SearchBarCollectionReusableView: UICollectionReusableView {
     }
 }
 
-class CategoryCollectionView: UICollectionViewController{
+class CategoryCollectionView: UICollectionViewController, UISearchResultsUpdating {
     
     
     var prodList : PFQuery!
     var categoryList = []
     var productList = []
     var currentCategory = ""
+    var searchBar = UISearchBar()
+    
     
     func getSubCategoriesObjectIDs( productList: PFQuery) -> [[String]]{
         var ret: [[String]] = []
@@ -118,9 +120,6 @@ class CategoryCollectionView: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         // Register cell classes
         
         
@@ -149,8 +148,13 @@ class CategoryCollectionView: UICollectionViewController{
         println("Search found the following - \(res)")
 
         // Do any additional setup after loading the view.
+        
+        
+        
     }
-
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        println("Search is active")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -176,6 +180,7 @@ class CategoryCollectionView: UICollectionViewController{
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
+        
         return categoryList.count
     }
     

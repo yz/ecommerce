@@ -4,9 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoryCollectionView" customModule="Mobile_Store" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoryCollectionView" customModule="Ecommerce" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="Rum-Wy-i3Z" id="PbH-hW-6Zh"/>
+                <outlet property="view" destination="Rum-Wy-i3Z" id="1vG-3I-DaW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,7 +24,7 @@
                 <outlet property="dataSource" destination="-1" id="lZb-w4-bbp"/>
                 <outlet property="delegate" destination="-1" id="rLk-Mu-we9"/>
             </connections>
-            <point key="canvasLocation" x="230" y="163"/>
+            <point key="canvasLocation" x="232" y="244"/>
         </collectionView>
     </objects>
 </document>

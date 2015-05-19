@@ -10,23 +10,9 @@ import UIKit
 import Parse
 import ParseUI
 
-class ShoppingCartViewController: PFQueryCollectionViewController {
+class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecognizerDelegate{
     
     var cartCount:Int = 0
-    
-    convenience init(className: String?) {
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
-        layout.minimumInteritemSpacing = 5.0
-        self.init(collectionViewLayout: layout,className : className)
-        title = "Shopping Cart"
-        pullToRefreshEnabled = true
-        paginationEnabled = false
-        
-        super.collectionView?.allowsMultipleSelection = true
-        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
-    }
-   
     func checkOut()
     {
         println("Code for checkout with items in the shopping cart")
@@ -53,8 +39,26 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
     override func viewWillAppear(animated: Bool) {
         // navigationItem.title = &quot;One&quot;
         navigationItem.title = "Items in the Cart : \(cartCount)"
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
+        layout.minimumInteritemSpacing = 5.0
+        pullToRefreshEnabled = true
+        paginationEnabled = false
+        super.collectionView?.allowsMultipleSelection = true
+        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
+        
+        
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.collectionView?.addGestureRecognizer(lpgr)
     
+    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -90,6 +94,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             return currCart.query()
         }
     }
+    
+    
     
     // MARK: CollectionView
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
@@ -129,5 +135,24 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
         return true
     }
     
+    
+    // Long press
+    func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
+        if gestureRecognizer.state != UIGestureRecognizerState.Ended{
+            return
+        }
+        
+        let p = gestureRecognizer.locationInView(self.collectionView)
+        
+        let indexPath = self.collectionView?.indexPathForItemAtPoint(p)
+        
+        if let index = indexPath {
+            var cell = self.collectionView?.cellForItemAtIndexPath(index)
+            // do stuff with your cell, for example print the indexPath
+            println("Long pressed \(index.row)")
+        } else {
+            println("Could not find index path")
+        }
+    }
 
 }
