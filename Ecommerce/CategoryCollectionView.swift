@@ -23,13 +23,14 @@ class SearchBarCollectionReusableView: UICollectionReusableView {
     }
 }
 
-class CategoryCollectionView: UICollectionViewController{
+class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
     
     
     var prodList : PFQuery!
     var categoryList = []
     var productList = []
     var currentCategory = ""
+    var searchBar = UISearchBar()
     
     func getSubCategoriesObjectIDs( productList: PFQuery) -> [[String]]{
         var ret: [[String]] = []
@@ -149,6 +150,16 @@ class CategoryCollectionView: UICollectionViewController{
         println("Search found the following - \(res)")
 
         // Do any additional setup after loading the view.
+        
+        
+        // Search Bar
+        
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 64, width: UIScreen.mainScreen().bounds.width, height: 44))
+        self.view.addSubview(searchBar)
+        searchBar.delegate = self
+        self.collectionView?.frame = CGRect(x: 0, y: 44, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height-44)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -255,8 +266,12 @@ class CategoryCollectionView: UICollectionViewController{
         
     }
     
-    
+    // Search Bar Delegate methods
 
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println("Searching")
+        self.collectionView?.reloadData()
+    }
     
 
 }
