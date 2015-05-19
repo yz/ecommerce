@@ -12,6 +12,8 @@ import ParseUI
 
 class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecognizerDelegate{
     
+    var dictIndexToHierarchy = [Int: String]()
+    
     convenience init(className: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
@@ -209,18 +211,16 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         
         
         //   Eg. To display items from the product table
-        
         var productTitle = object?["Hierarchy"] as String
-        productTitle = productTitle.replace(".*\\.", template: "")
-        
         var imageLink = object?["itemImage"] as String
         
-        println(imageLink)
-        cell?.textLabel.text = productTitle + "( " + String(getCount(String(object?["Hierarchy"] as NSString))) + " )"
+        dictIndexToHierarchy[indexPath.item] = productTitle
+        
+        //println(imageLink)
+        cell?.textLabel.text = productTitle.replace(".*\\.", template: "") + "( " + String(getCount(String(object?["Hierarchy"] as NSString))) + " )"
         cell?.contentView.layer.borderWidth = 1.0
         cell?.contentView.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell?.imageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
-        
         return cell
     }
     
@@ -249,7 +249,12 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         if let index = indexPath {
             var cell = self.collectionView?.cellForItemAtIndexPath(index)
             // do stuff with your cell, for example print the indexPath
-            println("Long pressed \(index.row)")
+            
+            let currentUser = PFUser.currentUser()
+            currentUser.fetch()
+            removeItemFromCart(currentUser["email"] as String, path: dictIndexToHierarchy[index.item]!)
+            println("Long pressed \(dictIndexToHierarchy[index.item])")
+            
         } else {
             println("Could not find index path")
         }
@@ -275,8 +280,6 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         paginationEnabled = false
         super.collectionView?.allowsMultipleSelection = true
         super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
-        
-        
     }
 
 

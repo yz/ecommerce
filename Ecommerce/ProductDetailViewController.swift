@@ -36,7 +36,7 @@ class ProductDetailViewController: UIViewController {
         {
             let currentUser = PFUser.currentUser()
             currentUser.fetch()
-            println("You are \(currentUser.username)")
+            //println("You are \(currentUser.username)")
             if addItemToCart(currentUser["email"] as String, path: hierarchy){
                 addToCart.setTitle("Added to Cart", forState: UIControlState.Normal)
             }
