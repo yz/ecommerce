@@ -99,10 +99,7 @@ class ProductDetailViewController: UIViewController {
                         println("Adding a new cart object.")
                         currCart.addObject(row)
                     }
-                    */
-                    var cartQuery:PFQuery = currCart.query().whereKey("Hierarchy", equalTo: row["Hierarchy"] as NSString)
-                    var tmp = cartQuery.findObjects()
-                    
+                    */                    
                     row["count"] = row["count"] as Int - 1
                     /*var anyob = PFObject(className: "Product")
                     anyob[row["Hierarchy"] as NSString] = 100

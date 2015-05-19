@@ -59,6 +59,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             let sideLength = min(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0 - layout.minimumInteritemSpacing
             layout.itemSize = CGSizeMake(sideLength, sideLength)
         }
+        
+        removeItemFromCart("b@c.com", path:"All.Clothing.Shirts.Canadian Lumber Jack")
     }
     
     // MARK: Data
@@ -123,11 +125,6 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
                 row = obj as PFObject
                 if row["productType"] as Int == 1{//Valid item selected, add to cart
                     
-                    var cartQuery:PFQuery = currCart.query().whereKey("Hierarchy", equalTo: row["Hierarchy"] as NSString)
-                    var tmp = cartQuery.findObjects()
-                    
-                    row["count"] = row["count"] as Int + 1
-                    
                     let cnt:String = cart["count"] as String
                     var res:String = ""
                     for keyval in cnt.componentsSeparatedByString("%"){
@@ -136,12 +133,15 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
                             var k = kv[0]
                             var v = kv[1]
                             if k == row["Hierarchy"] as String{
+                                
                                 if v.toInt() > 0{
                                     v = String(v.toInt()! - 1)
+                                    row["count"] = row["count"] as Int + 1
                                 }
-                                else{
+                                
+                                if v.toInt() <= 0{
                                     currCart.removeObject(row) //No longer in cart. Remove relation
-                                    continue
+                                    continue//Count of this item is no longer added
                                 }
                                 
                                 removed = true
