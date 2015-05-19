@@ -60,7 +60,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController {
             layout.itemSize = CGSizeMake(sideLength, sideLength)
         }
         
-        removeItemFromCart("b@c.com", path:"All.Clothing.Shirts.Canadian Lumber Jack")
+        //removeItemFromCart("b@c.com", path:"All.Clothing.Shirts.Canadian Lumber Jack") //TEST CODE! REMOVE IT!
     }
     
     // MARK: Data
