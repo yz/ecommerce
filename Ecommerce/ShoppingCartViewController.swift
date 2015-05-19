@@ -15,15 +15,18 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
     var cartCount:Int = 0
     func checkOut()
     {
-        println("Code for checkout with items in the shopping cart")
+         println("Code for checkout with items in the shopping cart")
+        let paymentView : PaymentViewController = PaymentViewController(nibName:"PaymentViewController",bundle:nil)
+        paymentView.price = 0
+        for product in queryForCollection().findObjects(){
+            var numItems = Float64(getCount(product["Hierarchy"] as String))
+            paymentView.price += numItems * (product["unitPrice"] as Float64)
+        }
         
-        var alert = UIAlertController(title: "Total Cost", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
+        var alert = UIAlertController(title: "Total Cost", message: paymentView.price.description, preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
             println("Ok")
-            
-        let paymentView : PaymentViewController = PaymentViewController(nibName:"PaymentViewController",bundle:nil)
-        paymentView.price = 24 //REMOVE THIS! ADD ACTUAL COST HERE
             
         self.navigationController?.pushViewController(paymentView, animated: true)
             
@@ -67,6 +70,8 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
             let sideLength = min(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0 - layout.minimumInteritemSpacing
             layout.itemSize = CGSizeMake(sideLength, sideLength)
         }
+        
+        //removeItemFromCart("b@c.com", path:"All.Clothing.Shirts.Canadian Lumber Jack") //TEST CODE! REMOVE IT!
     }
     
     // MARK: Data
@@ -87,6 +92,12 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
             custList = custList.whereKey("email", equalTo: forCustomer["email"] as String)
             var customer:PFObject = custList.getFirstObject() as PFObject
             cartList = cartList.whereKey("customer", equalTo: customer)
+            if let iscartthere = cartList.getFirstObject(){
+                //Do nothing.
+            }else{
+                //Initialize cart if missing
+                SecondViewController.init_cart(PFUser.currentUser())
+            }
             var cart:PFObject = cartList.getFirstObject() as PFObject
             var currCart:PFRelation = cart.relationForKey("Product")
             println("No of objects in the cart are \(currCart.query().countObjects())");
@@ -114,7 +125,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         var imageLink = object?["itemImage"] as String
         
         println(imageLink)
-        cell?.textLabel.text = productTitle
+        cell?.textLabel.text = productTitle + "( " + String(getCount(String(object?["Hierarchy"] as NSString))) + " )"
         cell?.contentView.layer.borderWidth = 1.0
         cell?.contentView.layer.borderColor = UIColor.lightGrayColor().CGColor
         cell?.imageView.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)

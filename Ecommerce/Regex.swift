@@ -42,6 +42,17 @@ struct Regex {
 
 
 extension String {
+    
+    func findMatch(regex: String) -> [AnyObject] {
+        let pattern = Regex(pattern: regex)
+        let range: NSRange = NSMakeRange(0, distance(self.startIndex,self.endIndex))
+        if pattern.regex != nil {
+            let matches: [AnyObject] = pattern.regex!.matchesInString(self, options: pattern.matchingOptions, range: range)
+            return matches
+        }
+        return []
+    }
+    
     func matchRegex(pattern: Regex) -> Bool {
         let range: NSRange = NSMakeRange(0, distance(self.startIndex,self.endIndex))
         if pattern.regex != nil {
