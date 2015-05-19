@@ -10,9 +10,21 @@ import UIKit
 import Parse
 import ParseUI
 
-class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecognizerDelegate{
+class ShoppingCartViewController: PFQueryCollectionViewController {
     
-    var cartCount:Int = 0
+    convenience init(className: String?) {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
+        layout.minimumInteritemSpacing = 5.0
+        self.init(collectionViewLayout: layout,className : className)
+        title = "Shopping Cart"
+        pullToRefreshEnabled = true
+        paginationEnabled = false
+        
+        super.collectionView?.allowsMultipleSelection = true
+        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
+    }
+    
     func checkOut()
     {
          println("Code for checkout with items in the shopping cart")
@@ -39,29 +51,6 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
     }
     // MARK: UIViewController
     
-    override func viewWillAppear(animated: Bool) {
-        // navigationItem.title = &quot;One&quot;
-        navigationItem.title = "Items in the Cart : \(cartCount)"
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
-        layout.minimumInteritemSpacing = 5.0
-        pullToRefreshEnabled = true
-        paginationEnabled = false
-        super.collectionView?.allowsMultipleSelection = true
-        super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
-        
-        
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delaysTouchesBegan = true
-        lpgr.delegate = self
-        self.collectionView?.addGestureRecognizer(lpgr)
-    
-    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -100,13 +89,113 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
             }
             var cart:PFObject = cartList.getFirstObject() as PFObject
             var currCart:PFRelation = cart.relationForKey("Product")
-            println("No of objects in the cart are \(currCart.query().countObjects())");
-            cartCount = currCart.query().countObjects()
             return currCart.query()
         }
     }
     
+    func removeItemFromCart(usr:String, path:String)->(Bool){
+        var removed:Bool = false
+        var hrchy = path
+        path.replace(".*\\.", template: "")
+        var row:PFObject! = nil
+        var productList:PFQuery = PFQuery(className: "Product");
+        var custList:PFQuery = PFQuery(className: "_User");
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        
+        
+        var matchPattern = "\(hrchy)"
+        productList = productList.whereKey("Hierarchy", matchesRegex: matchPattern)
+        custList = custList.whereKey("email", equalTo: usr)
+        
+        if(productList.countObjects() != 0 && custList.countObjects() == 1){//Objects exists
+            
+            var customer:PFObject = custList.getFirstObject() as PFObject
+            cartList = cartList.whereKey("customer", equalTo: customer)
+            if let iscartthere = cartList.getFirstObject(){
+                //Do nothing.
+            }else{
+                //Initialize cart if missing
+                SecondViewController.init_cart(PFUser.currentUser())
+                return false
+            }
+            var cart:PFObject = cartList.getFirstObject() as PFObject
+            var currCart:PFRelation = cart.relationForKey("Product")
+            
+            for obj in productList.findObjects(){
+                row = obj as PFObject
+                if row["productType"] as Int == 1{//Valid item selected, add to cart
+                    
+                    let cnt:String = cart["count"] as String
+                    var res:String = ""
+                    for keyval in cnt.componentsSeparatedByString("%"){
+                        if !keyval.isEmpty{
+                            let kv:[String] = keyval.componentsSeparatedByString("=")
+                            var k = kv[0]
+                            var v = kv[1]
+                            if k == row["Hierarchy"] as String{
+                                
+                                if v.toInt() > 0{
+                                    v = String(v.toInt()! - 1)
+                                    row["count"] = row["count"] as Int + 1
+                                }
+                                
+                                if v.toInt() <= 0{
+                                    currCart.removeObject(row) //No longer in cart. Remove relation
+                                    continue//Count of this item is no longer added
+                                }
+                                
+                                removed = true
+                            }
+                            
+                            if res.isEmpty{
+                                res = k + "=" + v
+                            }else{
+                                res = res + "%" + k + "=" + v
+                            }
+                        }
+                    }
+                    
+                    cart["count"] = res
+                    
+                    row.saveInBackgroundWithBlock(nil)
+                    cart.save()
+                    println("Saved objects")
+                }
+            }
+        }
+        
+        return removed
+    }
     
+    func getCount(var hierarchy:String)->(Int){
+        var custList:PFQuery = PFQuery(className: "_User");
+        var cartList:PFQuery = PFQuery(className: "Cart");
+        var forCustomer:PFUser = PFUser.currentUser()
+        forCustomer.fetch()
+        custList = custList.whereKey("email", equalTo: forCustomer["email"] as String)
+        var customer:PFObject = custList.getFirstObject() as PFObject
+        cartList = cartList.whereKey("customer", equalTo: customer)
+        if let iscartthere = cartList.getFirstObject(){
+            //Do nothing.
+        }else{
+            //Initialize cart if missing
+            SecondViewController.init_cart(PFUser.currentUser())
+        }
+        var cart:PFObject = cartList.getFirstObject() as PFObject
+        
+        let cnt:String = cart["count"] as String
+        for keyval in cnt.componentsSeparatedByString("%"){
+            if !keyval.isEmpty{
+                let kv:[String] = keyval.componentsSeparatedByString("=")
+                var k = kv[0]
+                var v = kv[1]
+                if k == hierarchy{
+                    return v.toInt()!
+                }
+            }
+        }
+        return 0
+    }
     
     // MARK: CollectionView
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
@@ -146,24 +235,5 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         return true
     }
     
-    
-    // Long press
-    func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
-        if gestureRecognizer.state != UIGestureRecognizerState.Ended{
-            return
-        }
-        
-        let p = gestureRecognizer.locationInView(self.collectionView)
-        
-        let indexPath = self.collectionView?.indexPathForItemAtPoint(p)
-        
-        if let index = indexPath {
-            var cell = self.collectionView?.cellForItemAtIndexPath(index)
-            // do stuff with your cell, for example print the indexPath
-            println("Long pressed \(index.row)")
-        } else {
-            println("Could not find index path")
-        }
-    }
 
 }

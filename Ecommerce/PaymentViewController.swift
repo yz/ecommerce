@@ -13,8 +13,6 @@ class PaymentViewController: UIViewController,PTKViewDelegate{
 
     var payBtn : UIBarButtonItem?
     var paymentView : PTKView?
-//    @IBOutlet var paymentView : PTKView?
-    
     var price: Float64 = 0.0
     
     func PaymentViewController(price:Float64){
@@ -27,12 +25,8 @@ class PaymentViewController: UIViewController,PTKViewDelegate{
         //Stripe.setDefaultPublishableKey("pk_live_M8nQYLZJPzkC5ti2D3vasBZs")
         Stripe.setDefaultPublishableKey("pk_test_gc5Hmze7imzY3TifemNrXuF8") //Mine(Sarath)
         
-        paymentView = PTKView(frame: CGRectMake(20, 20, 290, 55))
-
-        println("View's Center Co-ords \(self.view.center)")
-        println("View's Center Co-ords \(paymentView?.center)")
-        paymentView?.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2);
-        println("View's Center Co-ords \(paymentView?.center)")
+        paymentView = PTKView(frame: CGRectMake(0, 20, 290, 55))
+        paymentView?.center = view.center
         paymentView?.delegate = self
         view.addSubview(paymentView!)
         
