@@ -14,8 +14,11 @@ class LoginSignUpViewController: UIViewController, PFLogInViewControllerDelegate
     var loginViewController : CustomPFLogInViewController = CustomPFLogInViewController()
     var signupViewController : PFSignUpViewController = PFSignUpViewController()
     
+    
     @IBOutlet var btnLogout: UIButton!
    
+    @IBOutlet var userName: UILabel!
+    
     @IBAction func btnLogout(sender: AnyObject) {
         if let tmp = PFUser.currentUser()
         {
@@ -33,6 +36,7 @@ class LoginSignUpViewController: UIViewController, PFLogInViewControllerDelegate
             self.presentViewController(loginViewController, animated: false, completion: nil)
         }else{
             btnLogout.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
+            userName.text = PFUser.currentUser().username as String
         }
     }
     

@@ -14,6 +14,8 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
     var loginViewController : CustomPFLogInViewController = CustomPFLogInViewController()
     var signupViewController : PFSignUpViewController = PFSignUpViewController()
     
+    @IBOutlet var userName: UILabel!
+    
     @IBOutlet var btnLogoutObj: UIButton!
     
     @IBOutlet weak var btnDeleteUsr: UIButton!
@@ -48,8 +50,10 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         }else{
             //if let verified = PFUser.currentUser().objectForKey("emailVerified") as? Bool{
             if true{
-                btnLogoutObj.setTitle("Logout \(PFUser.currentUser().username)", forState: nil)
-                btnDeleteUsr.setTitle("Delete \(PFUser.currentUser().username)", forState: nil)
+                btnLogoutObj.setTitle("Logout", forState: nil)
+                btnDeleteUsr.setTitle("Delete account", forState: nil)
+                userName.text = "Hello \(PFUser.currentUser().username) !"
+                
                 return
                 
             }

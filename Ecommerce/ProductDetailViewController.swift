@@ -19,6 +19,7 @@ class ProductDetailViewController: UIViewController {
     
     @IBOutlet var productTitle: UILabel!
     
+    @IBOutlet var price: UILabel!
     var hierarchy : String = ""
     
     @IBAction func addToCart(sender: AnyObject) {
@@ -174,6 +175,8 @@ class ProductDetailViewController: UIViewController {
         println("-----------> " + hierarchy)
         productImage.image = UIImage(data: NSData(contentsOfURL: NSURL(string: imageLink)!)!)
         productTitle.text = self.title! + "( " + String(obj["count"] as Int) + " )"
+        price.text = "$"+String(obj["unitPrice"] as Int)
+        
         if (obj["count"] as Int) < 1{// Only one item left
             addToCart.enabled = false
         }

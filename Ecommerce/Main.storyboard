@@ -16,8 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-GY-RQ3">
-                                <rect key="frame" x="177" y="241" width="246" height="35"/>
+                            <button contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-GY-RQ3">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="246" id="uTX-bW-5FS"/>
                                 </constraints>
@@ -28,8 +27,8 @@
                                     <action selector="btnLogout:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="e4p-cx-7d9"/>
                                 </connections>
                             </button>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apg-ws-8bO">
-                                <rect key="frame" x="177" y="277" width="246" height="35"/>
+                            <button contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apg-ws-8bO">
+                                <rect key="frame" x="177" y="285" width="246" height="27"/>
                                 <state key="normal" title="Delete ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -37,27 +36,42 @@
                                     <action selector="btnDeleteAccount:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="ltY-JS-0bw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgc-Mm-M7M">
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCg-Eu-kag">
+                                <rect key="frame" x="279" y="222" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZZw-GY-RQ3" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="19q-vW-u2b"/>
+                            <constraint firstItem="aCg-Eu-kag" firstAttribute="centerX" secondItem="ZZw-GY-RQ3" secondAttribute="centerX" id="7jC-6q-bK8"/>
                             <constraint firstItem="apg-ws-8bO" firstAttribute="top" secondItem="ZZw-GY-RQ3" secondAttribute="bottom" constant="1" id="8wZ-Fp-wPr"/>
                             <constraint firstItem="apg-ws-8bO" firstAttribute="leading" secondItem="ZZw-GY-RQ3" secondAttribute="leading" id="HBu-nq-Y3A"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="ZZw-GY-RQ3" secondAttribute="bottom" constant="275" id="WRo-tN-Ltf"/>
-                            <constraint firstItem="ZZw-GY-RQ3" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="177" id="cRS-Jq-4el"/>
+                            <constraint firstItem="ZZw-GY-RQ3" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="220" id="cRS-Jq-4el"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="apg-ws-8bO" secondAttribute="bottom" constant="239" id="mzD-Jv-dpc"/>
                             <constraint firstItem="apg-ws-8bO" firstAttribute="trailing" secondItem="ZZw-GY-RQ3" secondAttribute="trailing" id="syr-NY-kW8"/>
+                            <constraint firstAttribute="centerY" secondItem="aCg-Eu-kag" secondAttribute="centerY" constant="67.5" id="xmL-TT-Uzg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uqg-3h-hGS"/>
                     <connections>
                         <outlet property="btnDeleteUsr" destination="apg-ws-8bO" id="vIl-8s-zHd"/>
                         <outlet property="btnLogoutObj" destination="ZZw-GY-RQ3" id="6NL-0c-kjj"/>
+                        <outlet property="userName" destination="aCg-Eu-kag" id="YkT-KM-IyP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686" y="1242"/>
+            <point key="canvasLocation" x="730" y="1298"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
