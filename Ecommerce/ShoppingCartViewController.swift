@@ -28,9 +28,11 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
     
     func getNumOfItems()->(Int64){
         var count:Int64 = 0
-        for product in queryForCollection().findObjects(){
-            var numItems = getCount(product["Hierarchy"] as String)
-            count += numItems
+        if let productsInCart = queryForCollection().findObjects(){
+            for product in productsInCart{
+                var numItems = getCount(product["Hierarchy"] as String)
+                count += numItems
+            }
         }
         return count
     }
