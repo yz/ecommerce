@@ -254,6 +254,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
             currentUser.fetch()
             removeItemFromCart(currentUser["email"] as String, path: dictIndexToHierarchy[index.item]!)
             println("Long pressed \(dictIndexToHierarchy[index.item])")
+            self.collectionView?.reloadData()
             
         } else {
             println("Could not find index path")
@@ -268,11 +269,13 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         lpgr.delaysTouchesBegan = true
         lpgr.delegate = self
         self.collectionView?.addGestureRecognizer(lpgr)
+        self.collectionView?.reloadData()
     
     }
     override func viewWillAppear(animated: Bool) {
         // navigationItem.title = &quot;One&quot;
-        navigationItem.title = "Items in the Cart :"
+        self.collectionView?.reloadData()
+        navigationItem.title = "Shopping Cart"
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
         layout.minimumInteritemSpacing = 5.0
@@ -280,6 +283,19 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         paginationEnabled = false
         super.collectionView?.allowsMultipleSelection = true
         super.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Checkout", style: UIBarButtonItemStyle.Plain, target: self, action: "checkOut")
+        
+        super.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Remove Item", style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromCartAlert")
+    }
+    
+    func removeFromCartAlert()
+    {
+        var alert = UIAlertController(title: "To remove an item from the cart", message: "Long press on the corresponding item", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
+            println("Ok")
+        
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 

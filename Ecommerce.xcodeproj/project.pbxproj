@@ -111,7 +111,6 @@
 		9C8CFE201AD82CA900E322E7 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8CFE0C1AD82CA900E322E7 /* ProductDetailViewController.swift */; };
 		9C8CFE211AD82CA900E322E7 /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CFE0D1AD82CA900E322E7 /* Login.xib */; };
 		9C8CFE221AD82CA900E322E7 /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CFE0E1AD82CA900E322E7 /* ProductDetailView.xib */; };
-		9C8CFE231AD82CA900E322E7 /* ProductDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CFE0F1AD82CA900E322E7 /* ProductDetail.xib */; };
 		9C8CFE241AD82CA900E322E7 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8CFE101AD82CA900E322E7 /* DummyViewController.swift */; };
 		9C8CFE251AD82CA900E322E7 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8CFE111AD82CA900E322E7 /* CategoryViewCell.swift */; };
 		9C8CFE261AD82CA900E322E7 /* CategoryCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CFE121AD82CA900E322E7 /* CategoryCollectionView.xib */; };
@@ -278,7 +277,6 @@
 		9C8CFE0C1AD82CA900E322E7 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		9C8CFE0D1AD82CA900E322E7 /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
 		9C8CFE0E1AD82CA900E322E7 /* ProductDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
-		9C8CFE0F1AD82CA900E322E7 /* ProductDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetail.xib; sourceTree = "<group>"; };
 		9C8CFE101AD82CA900E322E7 /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		9C8CFE111AD82CA900E322E7 /* CategoryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewCell.swift; sourceTree = "<group>"; };
 		9C8CFE121AD82CA900E322E7 /* CategoryCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionView.xib; sourceTree = "<group>"; };
@@ -543,7 +541,6 @@
 				9C8CFE0C1AD82CA900E322E7 /* ProductDetailViewController.swift */,
 				9C8CFE0D1AD82CA900E322E7 /* Login.xib */,
 				9C8CFE0E1AD82CA900E322E7 /* ProductDetailView.xib */,
-				9C8CFE0F1AD82CA900E322E7 /* ProductDetail.xib */,
 				9C1A49BE1AF6510200CDDE5C /* PaymentViewController.swift */,
 				9C1A49BF1AF6510200CDDE5C /* PaymentViewController.xib */,
 				9C8CFE101AD82CA900E322E7 /* DummyViewController.swift */,
@@ -739,7 +736,6 @@
 				9C970E291AE9C52600554D17 /* ShoppingCart.xib in Resources */,
 				61543DBC1AFD03EA0065409D /* StripeOSXTests-Shared.xcconfig in Resources */,
 				61543E081AFD04AE0065409D /* discover.png in Resources */,
-				9C8CFE231AD82CA900E322E7 /* ProductDetail.xib in Resources */,
 				61543E0E1AFD04AE0065409D /* placeholder.png in Resources */,
 				61543DB71AFD03EA0065409D /* StripeOSX-Debug.xcconfig in Resources */,
 				61543E0B1AFD04AE0065409D /* jcb@2x.png in Resources */,
