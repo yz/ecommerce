@@ -14,8 +14,11 @@ class PaymentViewController: UIViewController,PTKViewDelegate{
     var payBtn : UIBarButtonItem?
     var paymentView : PTKView?
     var price: Float64 = 0.0
+    var result: Bool = false
+    var parent:ShoppingCartViewController?
     
-    func PaymentViewController(price:Float64){
+    func PaymentViewController(parent:ShoppingCartViewController, price:Float64){
+        self.parent = parent
         self.price = price
     }
     
@@ -64,10 +67,16 @@ class PaymentViewController: UIViewController,PTKViewDelegate{
     func handleToken(token: STPToken!) {
         //send token to backend and create charge
         //var result: Bool = PFCloud.callFunction("chargeCard", withParameters: ["price": self.price, "cardToken": "INVALID_TOKEN_ID"]) as Bool//FOR FAILURE ONLY! REMOVE IT.
-        var result: Bool = PFCloud.callFunction("chargeCard", withParameters: ["price": self.price, "cardToken": token.tokenId]) as Bool
-        println("Charging is successful = \(result)")
-        var alert = UIAlertView(title: "Payment Information", message: result ? "Success!" : "Sorry, the payment failed. Please try again.", delegate: self, cancelButtonTitle: "Ok")
-        alert.show()
+        self.result = PFCloud.callFunction("chargeCard", withParameters: ["price": self.price, "cardToken": token.tokenId]) as Bool
+        println("Charging is successful = \(self.result)")
+        var alert = UIAlertController(title: "Payment Information", message: self.result ? "Success! $\(self.price) has been charged to your account." : "Sorry, the payment failed. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
+            println("Ok")
+            self.parent?.clearShoppingCart()
+            self.navigationController?.popViewControllerAnimated(true)
+            
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

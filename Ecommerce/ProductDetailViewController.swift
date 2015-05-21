@@ -145,7 +145,8 @@ class ProductDetailViewController: UIViewController {
                     }
                     cart["count"] = cart["count"][row["Hierarchy"] as NSString] as Int + 1*/
                     currCart.addObject(row)
-                    row.saveInBackgroundWithBlock(nil)
+                    row.save()
+                    //row.saveInBackgroundWithBlock(nil)
                     cart.save()
                     added = true
                     println("Saved objects")

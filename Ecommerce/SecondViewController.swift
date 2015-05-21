@@ -160,8 +160,7 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
         row["count"] = "" //Init count to null
         var pfrCartCustomer:PFRelation = row.relationForKey("customer")
         pfrCartCustomer.addObject(customer)
-        
-        row.saveInBackgroundWithBlock(nil)
+        row.save()
     }
     
 }
