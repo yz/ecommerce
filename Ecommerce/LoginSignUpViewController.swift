@@ -56,9 +56,23 @@ class LoginSignUpViewController: UIViewController, PFLogInViewControllerDelegate
         //loginNewOrLogout()
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
+    func setShoppingCartBadgeCount()
+    {
+        let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Cart")
+        var tabBarItem = self.tabBarController?.tabBar.items?.last as UITabBarItem
+        var count = shoppingCart.getNumOfItems()
+        if count>0
+        {
+            tabBarItem.badgeValue = "\(count)"
+        }
+        else
+        {
+            tabBarItem.badgeValue = nil
+        }
+    }
     override func viewWillAppear(animated: Bool) {
         loginNewOrLogout()
+        setShoppingCartBadgeCount()
     }
     
     override func didReceiveMemoryWarning() {

@@ -120,6 +120,23 @@ class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
         return res
     }
     
+    func setShoppingCartBadgeCount()
+    {
+        let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Cart")
+        var tabBarItem = self.tabBarController?.tabBar.items?.last as UITabBarItem
+        var count = shoppingCart.getNumOfItems()
+        if count>0
+        {
+            tabBarItem.badgeValue = "\(count)"
+        }
+        else
+        {
+            tabBarItem.badgeValue = nil
+        }
+    }
+    override func viewWillAppear(animated: Bool) {
+        setShoppingCartBadgeCount()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -165,7 +182,6 @@ class CategoryCollectionView: UICollectionViewController,UISearchBarDelegate{
         
         
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -149,6 +149,7 @@ class ProductDetailViewController: UIViewController {
                     //row.saveInBackgroundWithBlock(nil)
                     cart.save()
                     added = true
+                    setShoppingCartBadgeCount()
                     println("Saved objects")
                 }
             }
@@ -157,6 +158,20 @@ class ProductDetailViewController: UIViewController {
         return added
     }
     
+    func setShoppingCartBadgeCount()
+    {
+        let shoppingCart : ShoppingCartViewController = ShoppingCartViewController(className: "Cart")
+        var tabBarItem = self.tabBarController?.tabBar.items?.last as UITabBarItem
+        var count = shoppingCart.getNumOfItems()
+        if count>0
+        {
+            tabBarItem.badgeValue = "\(count)"
+        }
+        else
+        {
+            tabBarItem.badgeValue = nil
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

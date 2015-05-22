@@ -276,6 +276,20 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
         return true
     }
 
+    func setShoppingCartBadge()
+    {
+        var tabBarItem = self.tabBarController?.tabBar.items?.last as UITabBarItem
+        var count = getNumOfItems()
+        if count>0
+        {
+            tabBarItem.badgeValue = "\(count)"
+        }
+        else
+        {
+            tabBarItem.badgeValue = nil
+        }
+    }
+    
     func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer){
         if gestureRecognizer.state != UIGestureRecognizerState.Ended{
             return
@@ -294,6 +308,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
             removeItemFromCart(currentUser["email"] as String, path: dictIndexToHierarchy[index.item]!)
             println("Long pressed \(dictIndexToHierarchy[index.item])")
             navigationItem.title = "My Cart (\(getNumOfItems()))"
+            setShoppingCartBadge()
             self.loadObjects()
             self.collectionView?.reloadData()
             
@@ -316,6 +331,7 @@ class ShoppingCartViewController: PFQueryCollectionViewController,UIGestureRecog
     
     override func viewWillAppear(animated: Bool) {
         // navigationItem.title = &quot;One&quot;
+        setShoppingCartBadge()
         self.loadObjects()
         self.collectionView?.reloadData()
         navigationItem.title = "My Cart (\(getNumOfItems()))"
