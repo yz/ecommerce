@@ -48,16 +48,15 @@ class SecondViewController: UIViewController, PFLogInViewControllerDelegate, PFS
             loginViewController.logInView.passwordField.text = ""
             self.presentViewController(loginViewController, animated: true, completion: nil)
         }else{
-            //if let verified = PFUser.currentUser().objectForKey("emailVerified") as? Bool{
-            if true{
-                btnLogoutObj.setTitle("Logout", forState: nil)
-                btnDeleteUsr.setTitle("Delete account", forState: nil)
-                userName.text = "Hello \(PFUser.currentUser().username) !"
-                
-                return
+            if let verified = PFUser.currentUser().objectForKey("emailVerified") as? Bool{
+                if verified{
+                    btnLogoutObj.setTitle("Logout", forState: nil)
+                    btnDeleteUsr.setTitle("Delete account", forState: nil)
+                    userName.text = "Hello \(PFUser.currentUser().username) !"
+                    return
+                }
                 
             }
-            
             PFUser.logOut()
             var alert = UIAlertView(title: "First-time Login", message: "Please verify your e-mail before logging in", delegate: self, cancelButtonTitle: "Ok")
             alert.show()
